@@ -128,7 +128,6 @@ new (function() {
 				if(cons.content)
 					cons.Console.append(code);
 			} catch(ex) {
-				reconstruire();
 			}
 		}
 
@@ -163,6 +162,13 @@ new (function() {
 			},
 			'error': function(msg) {
 				log('error', msg);
+			},
+			'draw': function() {
+				reconstruire();
+			},
+			'undraw': function() {
+				if(cons!=null) cons.close();
+				cons = null;
 			},
 		};
 	};
@@ -309,6 +315,14 @@ new (function() {
 		this.console.error(msg);
 		ext_tools.boardStatus = 0;
 		ext_tools.boardMessage = msg;
+	};
+	ext_tools.showConsole = function(b) {
+		if(this.console==undefined)
+			this.console = newConsole();
+		if(b)
+			this.console.draw();
+		else
+			this.console.undraw();
 	};
 	ext_tools.webSocketsArray = [];
 	ext_tools.boardLinkedArray = [];
@@ -596,6 +610,17 @@ new (function() {
 
 		return r;
 	};
+	var matrix_setLed = function(buf, x, y, w, h, value) {
+		x--, y--;
+		if(x<0 || y<0 || x>=w || y>=h) return;
+		y = h-y-1;
+		var l = y*w;
+		if(y%2==0)
+			l+= x;
+		else
+			l+= w-x-1;
+		buf.value[l] = value;
+	};
 	ext_tools.initLed = function(boardID, pin, x, y) {
 		var leds = x*y;
 		this.sendOrder('initLED', boardID, pin + '/' + x + '/' + y);
@@ -607,30 +632,9 @@ new (function() {
 		for(var i=0;i<leds;i++)
 			this.bufferData[boardID+'_'+pin].value[i] = 0;
 	};
-	ext_tools.setLed = function(boardID, pin, led, value) {
-		if(this.isBuffer(boardID, pin, 'err-led')) {
-			if(led >= 0 && led<this.bufferData[boardID+'_'+pin].value.length)
-				this.bufferData[boardID+'_'+pin].value[led] = value;
-		}
-	};
 	ext_tools.setXYLed = function(boardID, pin, x, y, value) {
-		if(this.isBuffer(boardID, pin, 'err-led')) {
-			x--; y--;
-			if(x>=0 && y>=0 && x < this.bufferData[boardID+'_'+pin].w && y < this.bufferData[boardID+'_'+pin].h)
-				this.bufferData[boardID+'_'+pin].value[(this.bufferData[boardID+'_'+pin].h-y-1)*this.bufferData[boardID+'_'+pin].w+x] = value;
-		}
-	};
-	ext_tools.setLeds = function(boardID, pin, led1, led2, value) {
-		if(this.isBuffer(boardID, pin, 'err-led')) {
-			if(led1>led2) { var l = led1; led1 = led2; led2 = l; }
-			if(led2 >= 0 && led1<this.bufferData[boardID+'_'+pin].value.length) {
-				if(led1<0) led1 =0;
-				if(led2 >= this.bufferData[boardID+'_'+pin].value.length)
-					led2 = this.bufferData[boardID+'_'+pin].value.length-1;
-				for(var i=led1; i <= led2; i++)
-					this.bufferData[boardID+'_'+pin].value[i] = value;
-			}
-		}
+		if(this.isBuffer(boardID, pin, 'err-led'))
+			matrix_setLed(this.bufferData[boardID+'_'+pin].value, x, y, this.bufferData[boardID+'_'+pin].w, this.bufferData[boardID+'_'+pin].h, value);
 	};
 	ext_tools.fixeLeds = function(boardID, pin) {
 		if(this.isBuffer(boardID, pin, 'err-led')) {
@@ -673,12 +677,6 @@ new (function() {
 			y0 = parseInt(y0);
 			y1 = parseInt(y1);
 
-			var draw = function(x, y) {
-				x--; y--;
-				if(x>=0 && y>=0 && x<w && y<h)
-					buf[(h-y-1)*w+x] = col;
-			};
-
 			if(x1<x0) {
 				var s = x0; x0 = x1; x1 = s;
 				s=y0; y0 = y1; y1 = s;
@@ -693,7 +691,7 @@ new (function() {
 				dy=-dy;
 				cy=-1;
 			}
-			draw(x, y);
+			matrix_setLed(buf, x, y, w, h, col);
 			if(dy>dx) {
 				var de = 2*dx;
 				var dp = de-dy;
@@ -703,14 +701,14 @@ new (function() {
 						y++;
 						if(dp<=0) dp+=de;
 						else { dp+=dne; x++; }
-						draw(x, y);
+						matrix_setLed(buf, x, y, w, h, col);
 					}
 				} else {
 					while(y>y1) {
 						y--;
 						if(dp<=0) dp+=de;
 						else { dp+=dne; x++; }
-						draw(x, y);
+						matrix_setLed(buf, x, y, w, h, col);
 					}
 				}
 			} else {
@@ -721,7 +719,7 @@ new (function() {
 					x++;
 					if(dp<=0) dp+=de;
 					else { dp+=dne; y+=cy; }
-					draw(x, y);
+					matrix_setLed(buf, x, y, w, h, col);
 				}
 			}
 		}
@@ -735,19 +733,13 @@ new (function() {
 			if(x0>x1) { var s=x0; x0=x1; x1=s; }
 			if(y0>y1) { var s=y0; y0=y1; y1=s; }
 
-			var draw = function(x, y) {
-				x--; y--;
-				if(x>=0 && y>=0 && x<w && y<h)
-					buf[(h-y-1)*w+x] = col;
-			};
-
 			for(var x=x0; x<=x1; x++) {
-				draw(x, y0);
-				draw(x, y1);
+				matrix_setLed(buf, x, y0, w, h, col);
+				matrix_setLed(buf, x, y1, w, h, col);
 			}
 			for(var y=y0; y<=y1; y++) {
-				draw(x0, y);
-				draw(x1, y);
+				matrix_setLed(buf, x0, y, w, h, col);
+				matrix_setLed(buf, x1, y, w, h, col);
 			}
 		}
 	};
@@ -759,15 +751,9 @@ new (function() {
 			if(x0>x1) { var s=x0; x0=x1; x1=s; }
 			if(y0>y1) { var s=y0; y0=y1; y1=s; }
 
-			var draw = function(x, y) {
-				x--; y--;
-				if(x>=0 && y>=0 && x<w && y<h)
-					buf[(h-y-1)*w+x] = col;
-			};
-
 			for(var y=(y0<1)?1:y0; y<=h && y<=y1; y++)
 				for(var x=(x0<1)?1:x0; x<=w && x<=x1; x++)
-					draw(x, y);
+					matrix_setLed(buf, x, y, w, h, col);
 		}
 	};
 	ext_tools.drawMask = function(boardID, pin, x0, y0, col, m, mw, mh) {
@@ -776,18 +762,12 @@ new (function() {
 			var w = this.bufferData[boardID+'_'+pin].w;
 			var h = this.bufferData[boardID+'_'+pin].h;
 
-			var draw = function(x, y, c) {
-				x--; y--;
-				if(x>=0 && y>=0 && x<w && y<h)
-					buf[(h-y-1)*w+x] = c;
-			};
-
 			for(var y=0; y<mh; y++)
 				for(var x=0; x<mw; x++) {
 					var c = m&0x1;
 					m = (m-c)/2;
-					if(c==0) draw(x0+x, y0+y, 0);
-					else draw(x0+x, y0+y, col);
+					if(c==0) matrix_setLed(buf, x0+x, y0+y, w, h, 0);
+					else matrix_setLed(buf, x0+x, y0+y, w, h, col);
 				}
 		}
 	};
@@ -797,13 +777,6 @@ new (function() {
 			var w = this.bufferData[boardID+'_'+pin].w;
 			var h = this.bufferData[boardID+'_'+pin].h;
 
-			var draw = function(x, y, c) {
-				x--; y--;
-				if(x>=0 && y>=0 && x<w && y<h)
-					if(c!=0 || zero)
-						buf[(h-y-1)*w+x] = c;
-			};
-
 			var x=0, y=0;
 			var v = img.split('/');
 			var w0 = parseInt(v[0]);
@@ -811,11 +784,11 @@ new (function() {
 				if(v[i]=='z') {
 					var n=parseInt(v[++i],35), c=parseInt(v[++i],35);
 					while(n-->0) {
-						draw(x+x0, y+y0, c);
+						matrix_setLed(buf, x+x0, y+y0, w, h, c);
 						if(++x>=w0) { x=0; y++; }
 					}
 				} else {
-					draw(x+x0, y+y0, parseInt(v[i],35));
+					matrix_setLed(buf, x+x0, y+y0, w, h, parseInt(v[i],35));
 					if(++x>=w0) { x=0; y++; }
 				}
 			}
@@ -895,7 +868,7 @@ new (function() {
 		addr = parseInt(addr[1]);
 		num = parseInt(num)-1; value=parseInt(value);
 		if(!Number.isNaN(addr))
-			ext_tools.sendOrder('chainableSet', boardID, addr+'/'+num+'/'+value);
+			ext_tools.sendOrder('CLED', boardID, addr+'/set/'+num+'/'+value);
 	};
 
 	ext.barWrite = function(boardID, addr, num, value) {
@@ -903,34 +876,34 @@ new (function() {
 		num = parseInt(num);
 		value = (value=='Off')?0:1;
 		if(!Number.isNaN(addr))
-			ext_tools.sendOrder('ledBarSet', boardID, addr+'/'+num+'/'+value);
+			ext_tools.sendOrder('LBar', boardID, addr+'/set/'+num+'/'+value);
 	};
 
 	ext.barConfig = function(boardID, addr, cmd) {
 		addr = parseInt(addr[1]);
 		var cmd2str = {
-			'1': 'ledBarClear',
-			'2': 'ledBarRedFirst',
-			'3': 'ledBarRedLast',
-			'4': 'ledBarFull',
+			'1': 'clear',
+			'2': 'redFirst',
+			'3': 'redLast',
+			'4': 'full',
 		};
 		if(!Number.isNaN(addr) && cmd2str[cmd[0]]!=undefined)
-			ext_tools.sendOrder(cmd2str[cmd[0]], boardID, addr);
+			ext_tools.sendOrder('LBar', boardID, addr+'/'+cmd2str[cmd[0]]);
 	};
 
 	ext.digitDisp = function(boardID, addr, value) {
 		addr = parseInt(addr[1]);
 		if(!Number.isNaN(addr))
-			ext_tools.sendOrder('setDigitDisp', boardID, addr+'/'+value);
+			ext_tools.sendOrder('4DD', boardID, addr+'/set/'+value);
 	};
 
 	// Gestion Grove-LCD RGB Backlight
 	ext.LCDTxt = function(boardID, l1, l2) {
-		ext_tools.sendOrder('LCDprint', boardID, ext_tools.encodeText(l1)+'/'+ext_tools.encodeText(l2));
+		ext_tools.sendOrder('LCD', boardID, 'print/'+ext_tools.encodeText(l1)+'/'+ext_tools.encodeText(l2));
 	};
 
 	ext.LCDRgb = function(boardID, color) {
-		ext_tools.sendOrder('LCDcolor', boardID, color);
+		ext_tools.sendOrder('LCD', boardID, 'color/'+color);
 	};
 
 	ext.LCDMode = function(boardID, cmd) {
@@ -943,25 +916,25 @@ new (function() {
 		};
 		cmd = cmd.split('.');
 		if(cmd2str[cmd[0]]!=undefined)
-			ext_tools.sendOrder('LCDset', boardID, cmd[0]);
+			ext_tools.sendOrder('LCD', boardID, 'set/'+cmd[0]);
 	};
 
 	// Gestion Grove-oLED display
 	ext.oLEDtxt = function(boardID, txt) {
-		ext_tools.sendOrder('oLEDprint', boardID, ext_tools.encodeText(txt));
+		ext_tools.sendOrder('oLED', boardID, 'print/'+ext_tools.encodeText(txt));
 	};
 
 	ext.oLEDXY = function(boardID, x, y) {
-		ext_tools.sendOrder('oLEDXY', boardID, x+'/'+y);
+		ext_tools.sendOrder('oLED', boardID, 'move/'+x+'/'+y);
 	};
 
 	ext.oLEDclear = function(boardID) {
-		ext_tools.sendOrder('oLEDclear', boardID, '');
+		ext_tools.sendOrder('oLED', boardID, 'clear');
 	};
 
 	ext.oLEDbright = function(boardID, level) {
 		if(!Number.isNaN(level))
-			ext_tools.sendOrder('oLEDbright', boardID, parseInt(level));
+			ext_tools.sendOrder('oLED', boardID, 'bright/'+parseInt(level));
 	};
 
 	// Lire une valeur logique
@@ -1100,24 +1073,12 @@ new (function() {
 	// }}}
 
 	// Gestion des néoLEDs ws2812b {{{
-	ext.initLed = function(boardID, leds, pin) {
-		ext_tools.initLed(boardID, pin, leds, 1);
-	};
-
-	ext.initLeds = function(boardID, w, h, pin) {
+	ext.initLed = function(boardID, w, h, pin) {
 		ext_tools.initLed(boardID, pin, w, h);
-	};
-
-	ext.setLed = function(boardID, led, value, pin) {
-		ext_tools.setLed(boardID, pin, led, value);
 	};
 
 	ext.setXYLed = function(boardID, x, y, value, pin) {
 		ext_tools.setXYLed(boardID, pin, x, y, value);
-	};
-
-	ext.setLeds = function(boardID, pin, l1, l2, value) {
-		ext_tools.setLeds(boardID, pin, l1, l2, value);
 	};
 
 	ext.drawLine = function(boardID, x0, y0, x1, y1, col, pin) {
@@ -1169,7 +1130,15 @@ new (function() {
 	// Fixer le niveau de trace
 	ext.setDebugLevel = function(level) {
 		level = level.split('.');
-		ext_tools.debugLevel = level[0];
+		ext_tools.debugLevel = parseInt(level[0]);
+	};
+
+	ext.setConsole = function() {
+		ext_tools.showConsole(true);
+	};
+
+	ext.unsetConsole = function() {
+		ext_tools.showConsole(false);
 	};
 
 	// }}}
@@ -1186,7 +1155,7 @@ new (function() {
 			[' ', "G1.1 - Carte %m.bdNum Init. D %m.digitPin avec %m.moduleDigit ( %s )", 'digitPin', '1', 'Choisir une E/S', 'Choisir un module', ''],
 			[' ', "G1.2 - Carte %m.bdNum Init. A %m.analogPin avec %m.moduleAnalog ( %s )", 'analogPin', '1', 'Choisir une E/S', 'Choisir un module', ''],
 			[' ', "G1.3 - Carte %m.bdNum Init. M %m.moduleMode ( %s )", 'moduleMode', '1', 'Choisir un mode', ''],
-			[' ', "M1.4 - Carte %m.bdNum Init. la matrice de %n x %n leds sur %m.ledPin .", 'initLeds', '1', '20', '15', '1'],
+			[' ', "M1.4 - Carte %m.bdNum Init. la matrice de %n x %n leds sur %m.ledPin .", 'initLed', '1', '20', '15', '1'],
 			// Transmission sur les pins
 			[' ', "G1.1.1 - Carte %m.bdNum Mettre %m.digitPin à la valeur %m.onOff ", 'digitWrite', '1', 'Choisir une E/S', 'Off'],
 			[' ', "G1.1.2 - Carte %m.bdNum Sur %m.digitPin mettre la LED %n à %n . ", 'chainableWrite', '1', 'Choisir une E/S', '1', '255'],
@@ -1234,6 +1203,8 @@ new (function() {
 			['r', "G9.5.3 - Carte %m.bdNum Lire sur %m.analogPin la valeur %m.analogValue", 'getAnalogValue', '1', 'Choisir une E/S', '1. Joystick X'],
 			// Utilitaires
 			[' ', "Xz - Fixer le niveau de trace %m.trace", 'setDebugLevel', '1. Normal'],
+			[' ', "Xz - Afficher la console", 'setConsole'],
+			[' ', "Xz - Cacher la console", 'unsetConsole'],
 		],
 		menus: {
 			bdNum: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
