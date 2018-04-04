@@ -133,6 +133,8 @@ new (function() {
 
 		function remplir() {
 			try {
+				if(cons.Console.clear!=undefined)
+					cons.Console.clear();
 				for(var i=0; i<trace.count; i++)
 					cons.Console.append(trace[i]);
 			} catch(ex) {
@@ -399,6 +401,36 @@ new (function() {
 	ext_tools.isSimulateBoard = function(boardID) {
 		return this.simulateurs[boardID]!=undefined;
 	};
+	ext_tools.onMessage = function(message, info) {
+		var msg = message.split('/');
+
+		// Analyse du message
+		switch (msg[0]) {
+		case 'dataUpdate':
+			this.setSensorData(parseInt(msg[1]), msg[2]);
+			break;
+		case 'invalidSetMode':
+		case 'invalidPinCommand':
+		case 'throwExeception':
+			var message = Trad['err-'+msg[1]];
+			if(message == undefined)
+				message = Trad.traduir('err-unknow', {code:msg[1]});
+			message+= Trad.traduir('err-board', info);
+			if(msg[2]!=undefined)
+				message+= Trad.traduir('err-pin', {pin:msg[2]});
+			this.error(message);
+			break;
+		case 'version':
+			// Fixer la version du serveur actuelle
+			var idSoc = ext_tools.foundWebSocket(info.ip, info.port);
+			var so = ext_tools.webSocketsArray[idSoc];
+			so.version = msg[1];
+			ext_tools.trace(1, 'server-version', {board:info.board, ip: info.ip, port: info.port, version: msg[1]});
+			break;
+		default:
+			ext_tools.trace(1, 'err-message', {board:info.board, msg:message});
+		}
+	};
 	ext_tools.setBoard = function(boardID, ipAddress, port, callback) {
 		if(this.simulateurs[boardID]!=undefined)
 			this.simulateurs[boardID].close();
@@ -444,40 +476,7 @@ new (function() {
 
 					socket.onmessage = function(message) {
 						ext_tools.trace(1, 'trace-message', {ip:ipAddress, port:port, msg:message.data});
-
-						var msg = message.data.split('/');
-
-						// Analyse du message
-						switch (msg[0]) {
-						case 'dataUpdate':
-							console.log(message.data);
-							var index = msg[1]; // Valeur unique utilisée comme index dans xi_sensorDataArray
-							var data = msg[2];  // Valeur retourné pour ce capteur à placer dans xi_sensorDataArray
-							ext_tools.setSensorData(index, data);
-							break;
-						case 'invalidSetMode':
-						case 'invalidPinCommand':
-						case 'throwExeception':
-							var message = Trad['err-'+msg[1]];
-							if(message == undefined) {
-								message = Trad.traduir('err-unknow', {code:msg[1]});
-							} else if(msg[2]!=undefined) {
-								message+= Trad.traduir('err-board', {board:msg[2]});
-								if(msg[3]!=undefined)
-									message+= Trad.traduir('err-pin', {pin:msg[3]});
-							}
-							ext_tools.error(message);
-							break;
-						case 'version':
-							// Fixer la version du serveur actuelle
-							var idSoc = ext_tools.foundWebSocket(ipAddress, port);
-							var so = ext_tools.webSocketsArray[idSoc];
-							so.version = msg[1];
-							ext_tools.trace(1, 'server-version', {board:boardID, ip: ipAddress, port: port, version: version});
-							break;
-						default:
-							ext_tools.trace(1, 'err-message', {board:boardID, msg:message.data});
-						}
+						ext_tools.onMessage(message.data, {board: boardID, ip:ipAddress, port:port});
 					};
 
 					socket.onclose = function(message) {
@@ -580,7 +579,7 @@ new (function() {
 	};
 	ext_tools.sendOrder = function(order, boardID, message) {
 		if(this.isSimulateBoard(boardID)) {
-			this.simulateurs[boardID].sendOrder(order, message);
+			this.simulateurs[boardID].sendOrder(order + '/' + boardID + '/' + message);
 		} else if(this.isLinkedBoard(boardID)) {
 			var boardLnk = this.boardLinkedArray[boardID];
 			var socket = this.getSocket(boardID);
@@ -619,7 +618,7 @@ new (function() {
 			l+= x;
 		else
 			l+= w-x-1;
-		buf.value[l] = value;
+		buf[l] = value;
 	};
 	ext_tools.initLed = function(boardID, pin, x, y) {
 		var leds = x*y;
