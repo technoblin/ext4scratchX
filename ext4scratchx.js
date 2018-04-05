@@ -1184,7 +1184,7 @@ new (function() {
 			[' ', "G5.1 - Carte %m.dbNum Definir le fonctionnement de %n comme %m.stepMode .",  'motorMode', '1', '5', '1. Pas-à-pas'],
 			[' ', "G5.2 - Carte %m.dbNum Faire avancer le moteur %n de %n pas .",  'motorWalk', '1', '5', '20'],
 			[' ', "G5.3 - Carte %m.dbNum Interrompre le moteur %n .",  'motorBreak', '1', '5'],
-			[' ', "G5.4 - Carte %m.dbNum Démmarer sur %n le moteur %m.ledPin à la vitesse %n .",  'motorStart', '1', '5', '1', '200'],
+			[' ', "G5.4 - Carte %m.dbNum Démarrer sur %n le moteur %m.ledPin à la vitesse %n .",  'motorStart', '1', '5', '1', '200'],
 			[' ', "G5.5 - Carte %m.dbNum Stopper sur %n le moteur %m.ledPin .",  'motorStop', '1', '5', '1'],
 			// Gestion des servo-moteur Adafruit PWM PI/HAT
 			[' ', "A6.1 - Carte %m.dbNum Pilot %n Alimenter le moteur %n avec %n .",  'servoStart', '1', '64', '1', '100'],
