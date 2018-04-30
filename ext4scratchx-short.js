@@ -78,6 +78,8 @@ new (function() {
 		'err-11': "Mode incompatible sur la pin.",
 		'err-12': "Initialisation du bandeau à leds (rpi).",
 		'err-13': "Erreur d'initialisation du bandeau à leds.",
+		'err-14': "Erreur d'accès",
+		'err-15': "Erreur shield Grove non déclaré",
 		'sim-alert-pin': "La pin %pin de la carte %board %msg.",
 		'sim-alert-carte': "La carte %board %msg.",
 		'sim-err-no-pin': "n'a pas été définit",
@@ -409,9 +411,7 @@ new (function() {
 		case 'dataUpdate':
 			this.setSensorData(parseInt(msg[1]), msg[2]);
 			break;
-		case 'invalidSetMode':
-		case 'invalidPinCommand':
-		case 'throwExeception':
+		case 'fatal':
 			var message = Trad['err-'+msg[1]];
 			if(message == undefined)
 				message = Trad.traduir('err-unknow', {code:msg[1]});
@@ -419,6 +419,7 @@ new (function() {
 			if(msg[2]!=undefined)
 				message+= Trad.traduir('err-pin', {pin:msg[2]});
 			this.error(message);
+			alert(message);
 			break;
 		case 'version':
 			// Fixer la version du serveur actuelle
