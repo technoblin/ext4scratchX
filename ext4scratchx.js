@@ -418,7 +418,7 @@ new (function() {
 				message = Trad.traduir('err-unknow', {code:msg[1]});
 			message+= Trad.traduir('err-board', info);
 			if(msg[2]!=undefined)
-				message+= Trad.traduir('err-pin', {pin:msg[2]});
+				message+= Trad.traduir('err-pin', {pin:msg[3]});
 			this.error(message);
 			break;
 		case 'version':
