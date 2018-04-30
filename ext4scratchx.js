@@ -455,7 +455,8 @@ new (function() {
 				ext_tools.trace(0, 'trace-uplink', {ip:ipAddress, port:port, board:boardID});
 				ext_tools.boardStatus = 2;
 	 			ext_tools.boardMessage = Trad['online'];
- 				socket.send('resetBoard/'+version);
+ 				var socket = this.getSocket(boardID);
+				socket.ws.send('resetBoard/'+version);
 				callback();
 			} else {
 				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
