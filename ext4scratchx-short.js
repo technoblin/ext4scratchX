@@ -890,7 +890,7 @@ new (function() {
 		if(max<2) max = 2;
 		if(value<0) value=0;
 		else if(value>max) value=max;
-		value = Math.round(value/max);
+		value = Math.round(10*value/max);
 		if(!Number.isNaN(addr))
 			ext_tools.sendOrder('LBar', boardID, addr+'/level/'+value);
 	};
