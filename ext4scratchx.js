@@ -23,7 +23,7 @@ ext_tools : Outils d'interfaçage avec les serveurs piext
 new (function() {
 	var ext = this;
 	console.log('ext4ScratchX v1.0 par Ethernety.net');
-	var version = "20180322";
+	var version = "20180501";
 
 	// Mots du langage {{{
 	var Trad = {
@@ -74,7 +74,7 @@ new (function() {
 		'err-7': "Ecriture servomoteur sur la pin incompatible (continuous).",
 		'err-8': "Ecriture servomoteur sur la pin hors limite.",
 		'err-9': "Pilotage moteur pas à pas impossible.",
-		'err-10': "Mode de pin déjà définit.",
+		'err-10': "Mode de la pin déjà définit.",
 		'err-11': "Mode incompatible sur la pin.",
 		'err-12': "Initialisation du bandeau à leds (rpi).",
 		'err-13': "Erreur d'initialisation du bandeau à leds.",
@@ -295,7 +295,7 @@ new (function() {
 				var t = 'Stack{len:'+priv.l+',max:'+max;
 				for(var i=0; i<priv.l; i++)
 					t+= ','+i+':"'+priv[i]+'"';
-				return t+'}';
+				return t+'}'; // }
 			},
 		};
 	};
