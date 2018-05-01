@@ -457,7 +457,7 @@ new (function() {
 				ext_tools.boardStatus = 2;
 	 			ext_tools.boardMessage = Trad['online'];
  				var socket = this.getSocket(boardID);
-                		socket.ws.send('resetBoard/'+version);
+				socket.ws.send('resetBoard/'+version);
 				callback();
 			} else {
 				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
@@ -883,6 +883,18 @@ new (function() {
 			ext_tools.sendOrder('LBar', boardID, addr+'/set/'+num+'/'+value);
 	};
 
+	ext.barLevel = function(boardID, addr, value, max) {
+		addr = parseInt(addr[1]);
+		value = parseInt(value);
+		max = parseInt(max);
+		if(max<2) max = 2;
+		if(value<0) value=0;
+		else if(value>max) value=max;
+		value = Math.round(value/max);
+		if(!Number.isNaN(addr))
+			ext_tools.sendOrder('LBar', boardID, addr+'/level/'+value);
+	};
+
 	ext.barConfig = function(boardID, addr, cmd) {
 		addr = parseInt(addr[1]);
 		var cmd2str = {
@@ -1164,6 +1176,7 @@ new (function() {
 			[' ', "Sortie numérique de la carte %m.bdNum Mettre %m.digitPin à la valeur %m.onOff ", 'digitWrite', '1', 'Choisir une E/S', 'Off'],
 			[' ', "LED RGB de la carte %m.bdNum Sur %m.digitPin mettre la LED %n à %n . ", 'chainableWrite', '1', 'Choisir une E/S', '1', '255'],
 			[' ', "Bargraphe de la carte %m.bdNum Sur %m.digitPin mettre la LED %m.bdNum à %m.onOff . ", 'barWrite', '1', 'Choisir une E/S', '1', 'Off'],
+			[' ', "Bargraphe de la carte %m.bdNum Sur %m.digitPin afficher le score %n sur %n . ", 'barLevel', '1', 'Choisir une E/S', '1', '10'],
 			[' ', "Bargraphe de la carte %m.bdNum Sur %m.digitPin faire %m.ledBar . ", 'barConfig', '1', 'Choisir une E/S', '1. Effacer'],
 			[' ', "Afficheur 4 digits de la carte %m.bdNum Sur %m.digitPin afficher %s . ", 'digitDisp', '1', 'Choisir une E/S', '00:00'],
 			// Gestion du module Grove-LCD RGB Backlight

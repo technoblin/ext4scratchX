@@ -94,7 +94,7 @@ new (function() {
 
 	// Console de debugage {{{
 	var newConsole = function() {
-		var cons = null;	
+		var cons = null;
 		var trace = {
 			count:0,
 		};
@@ -883,6 +883,18 @@ new (function() {
 			ext_tools.sendOrder('LBar', boardID, addr+'/set/'+num+'/'+value);
 	};
 
+	ext.barLevel = function(boardID, addr, value, max) {
+		addr = parseInt(addr[1]);
+		value = parseInt(value);
+		max = parseInt(max);
+		if(max<2) max = 2;
+		if(value<0) value=0;
+		else if(value>max) value=max;
+		value = Math.round(value/max);
+		if(!Number.isNaN(addr))
+			ext_tools.sendOrder('LBar', boardID, addr+'/level/'+value);
+	};
+
 	ext.barConfig = function(boardID, addr, cmd) {
 		addr = parseInt(addr[1]);
 		var cmd2str = {
@@ -1164,8 +1176,9 @@ new (function() {
 			[' ', "G1.1.1 - Carte %m.bdNum Mettre %m.digitPin à la valeur %m.onOff ", 'digitWrite', '1', 'Choisir une E/S', 'Off'],
 			[' ', "G1.1.2 - Carte %m.bdNum Sur %m.digitPin mettre la LED %n à %n . ", 'chainableWrite', '1', 'Choisir une E/S', '1', '255'],
 			[' ', "G1.1.3 - Carte %m.bdNum Sur %m.digitPin mettre la LED %m.bdNum à %m.onOff . ", 'barWrite', '1', 'Choisir une E/S', '1', 'Off'],
-			[' ', "G1.1.4 - Carte %m.bdNum Sur %m.digitPin faire %m.ledBar . ", 'barConfig', '1', 'Choisir une E/S', '1. Effacer'],
-			[' ', "G1.1.5 - Carte %m.bdNum Sur %m.digitPin afficher %s . ", 'digitDisp', '1', 'Choisir une E/S', '00:00'],
+			[' ', "G1.1.4 - Carte %m.bdNum Sur %m.digitPin afficher le score %n sur %n . ", 'barLevel', '1', 'Choisir une E/S', '1', '10'],
+			[' ', "G1.1.5 - Carte %m.bdNum Sur %m.digitPin faire %m.ledBar . ", 'barConfig', '1', 'Choisir une E/S', '1. Effacer'],
+			[' ', "G1.1.6 - Carte %m.bdNum Sur %m.digitPin afficher %s . ", 'digitDisp', '1', 'Choisir une E/S', '00:00'],
 			// Gestion du module Grove-LCD RGB Backlight
 			[' ', "G3.1 - Carte %m.bdNum LCD écrire %s %s .", 'LCDTxt', '1', 'Ligne 1', 'Ligne 2'],
 			[' ', "G3.2 - Carte %m.bdNum LCD éclairer %n .", 'LCDRgb', '1', '255'],
