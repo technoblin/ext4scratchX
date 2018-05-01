@@ -884,13 +884,17 @@ new (function() {
 	};
 
 	ext.barLevel = function(boardID, addr, value, max) {
+		console.log('addr : '+addr+', value : '+value+', max : '+max);
 		addr = parseInt(addr[1]);
 		value = parseInt(value);
 		max = parseInt(max);
+		console.log('addr : '+addr+', value : '+value+', max : '+max);
 		if(max<2) max = 2;
 		if(value<0) value=0;
 		else if(value>max) value=max;
+		console.log('addr : '+addr+', value : '+value+', max : '+max);
 		value = Math.round(value/max);
+		console.log('addr : '+addr+', value : '+value+', max : '+max);
 		if(!Number.isNaN(addr))
 			ext_tools.sendOrder('LBar', boardID, addr+'/level/'+value);
 	};
