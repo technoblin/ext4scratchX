@@ -868,6 +868,7 @@ new (function() {
 			ext_tools.sendOrder('digitWrite', boardID, addr+'/'+value);
 	};
 
+	// Gestion des chainables Leds
 	ext.chainableWrite = function(boardID, addr, num, value) {
 		addr = parseInt(addr[1]);
 		num = parseInt(num)-1; value=parseInt(value);
@@ -875,6 +876,7 @@ new (function() {
 			ext_tools.sendOrder('CLED', boardID, addr+'/set/'+num+'/'+value);
 	};
 
+	// Gestion des bargraphes
 	ext.barWrite = function(boardID, addr, num, value) {
 		addr = parseInt(addr[1]);
 		num = parseInt(num);
@@ -887,7 +889,7 @@ new (function() {
 		addr = parseInt(addr[1]);
 		value = parseInt(value);
 		max = parseInt(max);
-		if(max<2) max = 2;
+		if(max<1) max = 1;
 		if(value<0) value=0;
 		else if(value>max) value=max;
 		value = Math.round(10*value/max);
@@ -907,6 +909,7 @@ new (function() {
 			ext_tools.sendOrder('LBar', boardID, addr+'/'+cmd2str[cmd[0]]);
 	};
 
+	// Gestion des 4 digits display
 	ext.digitDisp = function(boardID, addr, value) {
 		addr = parseInt(addr[1]);
 		if(!Number.isNaN(addr))
@@ -972,28 +975,25 @@ new (function() {
 		return ext_tools.getSensorData(boardID, addr);
 	};
 
-	// Lire la distance mesuré par le sonar
-	ext.getSonarData = function(boardID, addr, units) {
-		if(units !== 'CM')
-			return (ext_tools.getSensorData(boardID, addr) / 2.54).toFixed(4);
-		return ext_tools.getSensorData(boardID, addr);
-	};
-
+	// Lire la valeur mesuré par un module numérique
 	ext.getDigitValue = function(boardID, addr, cmd) {
-		var v = ext_tools.getSensorData(boardID, addr)
+		var v = ext_tools.getSensorData(boardID, addr);
 		if(v!=undefined) {
-			v = v.split(':');
 			cmd = parseInt(cmd.split('.')[0]);
 			switch(cmd) {
 			case 1:
 			case 2:
+				v = v.split(':');
 				if(v[0]=='DHT') return parseInt(v[cmd]);
 				break;
+			case 3:
+				return v;
 			}
 		}
 		return 0;
 	};
 
+	// Lire la valeur mesuré par un module analogique
 	ext.getAnalogValue = function(boardID, addr, cmd) {
 		var v = ext_tools.getSensorData(boardID, addr)
 		if(v!=undefined) {
@@ -1041,6 +1041,7 @@ new (function() {
 		return 0;
 	};
 
+	// Piloter le module i2c step motor driver
 	ext.motorMode = function(boardID, addr, mode) {
 		addr = parseInt(addr);
 		mode = mode.split('.');
@@ -1215,7 +1216,6 @@ new (function() {
 			['b', "Lire entrée numérique de la carte %m.bdNum État de %m.digitPin", 'getDigitalInputData', '1', 'Choisir une E/S'],
 			['r', "Lire entrée analogique de la carte %m.bdNum État de %m.analogPin", 'getAnalogSensorData', '1', 'Choisir une E/S'],
 			['r', "Lire entrée du module de la carte %m.bdNum lire %m.modValue", 'getModValue', '1', 'Choisir une valeur'],
-			['r', "Lire ultrason de la carte %m.bdNum Distance sonar de %m.digitPin en %m.distance", 'getSonarData', '1', 'Choisir une E/S', 'CM'],
 			['r', "Lire module numérique de la carte %m.bdNum Lire sur %m.digitPin la valeur %m.digitValue", 'getDigitValue', '1', 'Choisir une E/S', '1. Température'],
 			['r', "Lire module analogique de la carte %m.bdNum Lire sur %m.analogPin la valeur %m.analogValue", 'getAnalogValue', '1', 'Choisir une E/S', '1. Joystick X'],
 			// Utilitaires
@@ -1236,11 +1236,10 @@ new (function() {
 			LCD: ["1. Effacer l'écran", "2. Faire clignoter le curseur", "3. Faire clignoter l'écran", "4. Stopper le clig. du curseur", "5. Stopper le clig. de l'écran"],
 			onOff: ['Off', 'On'],
 			inversion: ['False', 'True'],
-			distance: ['CM', 'Pouces'],
 			trace: ['0. Minimal', '1. Normal', '2. Intense'],
 			modValue: ['1. GPS Latitude','2. GPS Longitude','3. GPS Nb satelites','4. TrackBall Haut','5. TrackBall Bas','6. TrackBall Gauche','7. TrackBall Droite','8. TrackBall Confirmer'],
 			ledBar: ['1. Effacer', '2. Rouge premier', '3. Rouge dernier', '4. Allumer tout'],
-			digitValue: ['1. Température', '2. Humidité'],
+			digitValue: ['1. Température', '2. Humidité', '3. Distance Sonar'],
 			analogValue: ['1. Joystick X', '2. Joystick Y', '3. Joystick Push'],
 			stepMode: ['1. Pas-à-pas', '2. Demi-pas', '3. Max-de-puissance', '4. Deux moteurs'],
 		},
