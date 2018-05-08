@@ -102,7 +102,7 @@ new (function() {
 		function addScript(scr) {
 			var s = cons.document.createElement('script');
 			s.type = 'text/javascript';
-			s.src = "http://ethernety.free.fr/extension4scratch/ScratchX/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+scr+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					remplir();
@@ -155,7 +155,7 @@ new (function() {
 		function init() {
 			if(cons.document.body) {
 				// Ajout les scripts
-				addScript("lib/console");
+				addScript("console");
 			} else
 				setTimeout(init, 100);
 		}
@@ -192,7 +192,7 @@ new (function() {
 			simulateur.init++;
 			var s = newEl('script');
 			s.type = 'text/javascript';
-			s.src = "http://ethernety.free.fr/extension4scratch/ScratchX/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+scr+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free();
@@ -214,7 +214,7 @@ new (function() {
 			var s = newEl('link');
 			s.type = 'text/css';
 			s.rel = "stylesheet";
-			s.href = "http://ethernety.free.fr/extension4scratch/ScratchX/"+src+".css";
+			s.href = "https://technoblin.github.io/ext4scratchX/lib/"+src+".css";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free();
@@ -252,11 +252,11 @@ new (function() {
 			console.log("init simulateur");
 			if(simulateur.board.document.body) {
 				// Ajout de la class de style
-				// addStyle("simulateur");
+				addStyle("simulateur");
 				// Ajout les scripts
-				addScript("lib/jquery-1.11.0.min");
-				addScript("lib/jquery-ui-1.10.4.custom.min");
-				addScript("lib/simulateur");
+				addScript("jquery-1.11.0.min");
+				addScript("jquery-ui-1.10.4.custom.min");
+				addScript("simulateur");
 				simulateur.free();
 			} else
 				setTimeout(init, 100);
