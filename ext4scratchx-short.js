@@ -438,6 +438,7 @@ new (function() {
 		if(ipAddress=='virtual') {
 			ext_tools.trace(1, 'trace-virtual', {board:boardID});
 			this.simulateurs[boardID] = newSimulateur(this, boardID, callback);
+			callback();
 		} else {
 			function noServerAlert() {
 				ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, port:port, board:boardID}));
