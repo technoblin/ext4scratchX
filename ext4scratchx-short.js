@@ -185,24 +185,23 @@ new (function() {
 			var s = newEl('script');
 			s.type = 'text/javascript';
 			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
-			src = 'script:'+src;
 			if(s.readyState) {
 				s.onreadystatechange = function() {
-					simulateur.free(src);
+					simulateur.free();
 				};
 			} else if(s.addEventListener) {
 				s.addEventListener('error', function(event) {
-					simulateur.free(src);
+					simulateur.free();
 				});
 				s.addEventListener('load', function(event) {
-					simulateur.free(src);
+					simulateur.free();
 				});
 			} else if(s.attachEvent) {
 				s.attachEvent('onerror', function() {
-					simulateur.free(src);
+					simulateur.free();
 				});
 				s.attachEvent('onload', function() {
-					simulateur.free(src);
+					simulateur.free();
 				});
 			}
 			simulateur.board.document.getElementsByTagName("head")[0].appendChild(s);
@@ -214,24 +213,23 @@ new (function() {
 			s.type = 'text/css';
 			s.rel = "stylesheet";
 			s.href = "https://technoblin.github.io/ext4scratchX/lib/"+src+".css";
-			src = 'style:'+src;
 			if(s.readyState) {
 				s.onreadystatechange = function() {
-					simulateur.free(src);
+					simulateur.free();
 				};
 			} else if(s.addEventListener) {
 				s.addEventListener('error', function(event) {
-					simulateur.free(src);
+					simulateur.free();
 				});
 				s.addEventListener('load', function(event) {
-					simulateur.free(src);
+					simulateur.free();
 				});
 			} else if(s.attachEvent) {
 				s.attachEvent('onerror', function() {
-					simulateur.free(src);
+					simulateur.free();
 				});
 				s.attachEvent('onload', function() {
-					simulateur.free(src);
+					simulateur.free();
 				});
 			}
 			simulateur.board.document.getElementsByTagName("head")[0].appendChild(s);
@@ -247,12 +245,11 @@ new (function() {
 		simulateur.sendOrder = function(order, message) {
 			this.board.Modules.sendOrder(order, message);
 		};
-		simulateur.free = function(src) {
+		simulateur.free = function() {
 			if(--simulateur.init==0) {
 				callback();
 				this.board.Modules.init(ext_tools, boardID);
 			}
-			console.log('newSimulateur.free('+src+') : '+simulateur.init);
 		};
 
 		var init = function() {
@@ -264,7 +261,7 @@ new (function() {
 				addScript("jquery-1.11.0.min");
 				addScript("jquery-ui-1.10.4.custom.min");
 				addScript("simulateur");
-				simulateur.free('general');
+				simulateur.free();
 			} else
 				setTimeout(init, 100);
 		};
@@ -445,7 +442,6 @@ new (function() {
 		if(ipAddress=='virtual') {
 			ext_tools.trace(1, 'trace-virtual', {board:boardID});
 			this.simulateurs[boardID] = newSimulateur(this, boardID, callback);
-			//callback();
 		} else {
 			function noServerAlert() {
 				ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, port:port, board:boardID}));

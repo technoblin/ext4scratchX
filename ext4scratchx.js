@@ -5,19 +5,11 @@
  * Inspiré par Xi4s v.004 du 07/11/2014 par Alan Yorinks
  * Version v.001
  *
+ * Documentations ScratchX
  * https://github.com/LLK/scratchx/wiki#load-a-javascript-file
  *
  * @author: Jean BLIN
  * @Copyright (c) 2016 Jean BLIN right reserved.
- *
-Documentation :
----------------
-Trad : Générer les mots du langage pour faciliter la traduction
-Trad.traduir('m', v{}) : Retourne la phrase m en remplacent les balises %mot par l'entrée v[mot]
-
-newSimulateur : Créer une carte virtuel pour les tests
-
-ext_tools : Outils d'interfaçage avec les serveurs piext
  *
  ******************************************************************************/
 new (function() {
@@ -99,10 +91,10 @@ new (function() {
 			count:0,
 		};
 
-		function addScript(scr) {
+		function addScript(src) {
 			var s = cons.document.createElement('script');
 			s.type = 'text/javascript';
-			s.src = "http://ethernety.free.fr/extension4scratch/ScratchX/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					remplir();
@@ -155,7 +147,7 @@ new (function() {
 		function init() {
 			if(cons.document.body) {
 				// Ajout les scripts
-				addScript("lib/console");
+				addScript("console");
 			} else
 				setTimeout(init, 100);
 		}
@@ -188,20 +180,26 @@ new (function() {
 				e.className = c;
 			return e;
 		}
-		function addScript(scr) {
+		function addScript(src) {
 			simulateur.init++;
 			var s = newEl('script');
 			s.type = 'text/javascript';
-			s.src = "http://ethernety.free.fr/extension4scratch/ScratchX/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free();
 				};
 			} else if(s.addEventListener) {
+				s.addEventListener('error', function(event) {
+					simulateur.free();
+				});
 				s.addEventListener('load', function(event) {
 					simulateur.free();
 				});
 			} else if(s.attachEvent) {
+				s.attachEvent('onerror', function() {
+					simulateur.free();
+				});
 				s.attachEvent('onload', function() {
 					simulateur.free();
 				});
@@ -214,16 +212,22 @@ new (function() {
 			var s = newEl('link');
 			s.type = 'text/css';
 			s.rel = "stylesheet";
-			s.href = "http://ethernety.free.fr/extension4scratch/ScratchX/"+src+".css";
+			s.href = "https://technoblin.github.io/ext4scratchX/lib/"+src+".css";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free();
 				};
 			} else if(s.addEventListener) {
+				s.addEventListener('error', function(event) {
+					simulateur.free();
+				});
 				s.addEventListener('load', function(event) {
 					simulateur.free();
 				});
 			} else if(s.attachEvent) {
+				s.attachEvent('onerror', function() {
+					simulateur.free();
+				});
 				s.attachEvent('onload', function() {
 					simulateur.free();
 				});
@@ -252,11 +256,11 @@ new (function() {
 			console.log("init simulateur");
 			if(simulateur.board.document.body) {
 				// Ajout de la class de style
-				// addStyle("simulateur");
+				addStyle("simulateur");
 				// Ajout les scripts
-				addScript("lib/jquery-1.11.0.min");
-				addScript("lib/jquery-ui-1.10.4.custom.min");
-				addScript("lib/simulateur");
+				addScript("jquery-1.11.0.min");
+				addScript("jquery-ui-1.10.4.custom.min");
+				addScript("simulateur");
 				simulateur.free();
 			} else
 				setTimeout(init, 100);
