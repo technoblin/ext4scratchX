@@ -235,10 +235,10 @@ new (function() {
 		};
 		simulateur.free = function(src) {
 			if(--simulateur.init==0) {
-				console.log('newSimulateur.free('+src+') : '+simulateur.init);
 				callback();
 				this.board.Modules.init(ext_tools, boardID);
 			}
+			console.log('newSimulateur.free('+src+') : '+simulateur.init);
 		};
 
 		var init = function() {
