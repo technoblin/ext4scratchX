@@ -1,474 +1,1685 @@
-<project name="Carrefour" app="Snap! 4.0, http://snap.berkeley.edu" version="1"><notes></notes><thumbnail>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAACYElEQVR4nO3Yr05kZxjA4b0QqkHAlYCY0cANcAEbBAaPQyDOHZCGi0DXVjEKko5EjBhBmq+qG2gyy2672R+ZPk/yiiNO8n7JLzl/Pg0IfaoX4P9NgKTeBPj8/DyWy+VPm/V6XZ2bD+JNgMvlciwWi++e1edfvmke7399e99qVZ2bD+K7A5ym6d0A//zj940RCpDXNgZ4c3MzTk5OxtXV1bi4uPhyPU3TuLy8HKenpxsDfPntVoB8k40BXl9fj+Pj47FYLMbOzs6X62maxvn5+Tg7OxMg/9m7j+D7+/vx8PDwQ94BBcg//ZCPkH87AuRNgOv1eqxWq582Ly8v1bn5IPyIJiVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAtxgb29v3N7e1mtsPQF+xXw+H7PZbMxms7G/vz8eHx/rlbaOAN/xd4CvZz6fj6Ojo3q1rSDAd2wK8PDwsF5tKwjwK14/gg8ODsbT01O90tYR4Aa7u7vj7u6uXmPrCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkNRfGWQTfQ/3GUkAAAAASUVORK5CYII=</thumbnail><stage name="Scène" width="480" height="360" costume="0" tempo="60" threadsafe="false" lines="round" codify="false" inheritance="false" sublistIDs="false" scheduled="false" id="1"><pentrails>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAFoCAYAAACPNyggAAACtUlEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+Bo3+AAF/RMkcAAAAAElFTkSuQmCC</pentrails><costumes><list id="2"></list></costumes><sounds><list id="3"></list></sounds><variables></variables><blocks></blocks><scripts></scripts><sprites><sprite name="Lutin" idx="1" x="0" y="0" heading="90" scale="1" rotation="1" draggable="true" costume="0" color="80,80,80" pen="tip" id="8"><costumes><list id="9"></list></costumes><sounds><list id="10"></list></sounds><variables></variables><blocks></blocks><scripts><script x="13" y="14"><block s="receiveGo"></block><custom-block s="Initialisation %txt"><l>virtual</l></custom-block><custom-block s="Mettre rue 1 à vert"></custom-block></script><script x="246" y="10"><block s="receiveCondition"><custom-block s="État numérique de la carte %n en %txt"><l>1</l><l>D5</l></custom-block></block><block s="doIf"><block s="reportEquals"><block var="cycle"/><l>0</l></block><script><block s="doSetVar"><l>cycle</l><l>1</l></block><block s="doWait"><l>2</l></block><custom-block s="Mettre rue 1 à orange"></custom-block><block s="doWait"><l>3</l></block><custom-block s="Mettre rue 2 vert"></custom-block><block s="doWait"><l>5</l></block><custom-block s="Mettre rue 2 orange"></custom-block><block s="doWait"><l>3</l></block><custom-block s="Mettre rue 1 à vert"></custom-block><block s="doWait"><l>7</l></block><block s="doSetVar"><l>cycle</l><l>0</l></block></script></block></script></scripts></sprite><watcher var="cycle" style="normal" x="10" y="10" color="243,118,29"/></sprites></stage><hidden></hidden><headers></headers><code></code><blocks><block-definition s="Initialiser le service ext4snap" type="command" category="other"><comment x="0" y="0" w="340" collapsed="false">Initialiser le service ext4snap&#xD;&#xD;Permet de charger les scripts nécessaires au fonctionnement des autres blocs. L&apos;appel de ce bloc est automatiquement fait avant tout autres blocs, il n&apos;est donc pas nécessaire de le placer avant de les utiliser.</comment><header></header><code></code><inputs></inputs><script><block s="doIfElse"><block s="evaluate"><block s="reportJSFunction"><list></list><l>return window.ext4snap===true;</l></block><list></list></block><script><block s="doRun"><block s="reportJSFunction"><list></list><l>window.ext_tools.trace(1, "trace-init");</l></block><list></list></block></script><script><block s="doRun"><block s="reportJSFunction"><list></list><l>&#xD;								console.log("Initialisation du service ext4snap.");&#xD;&#xD;								var s = document.createElement(&apos;script&apos;);&#xD;								s.type = &apos;text/javascript&apos;;&#xD;								s.src = &apos;lib/ext4snap.js&apos;;&#xD;								document.getElementsByTagName("head")[0].appendChild(s);&#xD;							</l></block><list></list></block><block s="doUntil"><block s="evaluate"><block s="reportJSFunction"><list></list><l>return window.ext4snap===true;</l></block><list></list></block><script><block s="doWait"><l>1</l></block></script></block></script></block></script></block-definition><block-definition s="Connection de la carte %&apos;boardID&apos; Adresse IP : %&apos;ipAddress&apos; Port : %&apos;port&apos;" type="command" category="piext"><comment x="0" y="0" w="276" collapsed="false">Attribuer à une carte, son adresse IP et son port. &#xD;&#xD;L&apos;adresse IP et le port permet d&apos;associer un serveur piext à la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt">IP</input><input type="%txt">1234</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>ipAddress</l><l>port</l><l>process</l></list><l>&#xD;						window.ext_tools.setBoard(boardID, ipAddress, port, function(etat) {&#xD;							if(etat) process.resume();&#xD;							else process.stop();&#xD;						});&#xD;						process.pause();&#xD;					</l></block><list><block var="boardID"/><block var="ipAddress"/><block var="port"/></list></block></script></block-definition><block-definition s="Déclarer le shield sur la carte %&apos;boardID&apos; Shield : %&apos;shield&apos; ( %&apos;opts&apos; )" type="command" category="piext"><comment x="0" y="0" w="276" collapsed="false">Affecter un shield à la carte.&#xD;&#xD;Définir un shield pour permettre son initialisation sur la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une carte<options>1. GrovePi
-2. PWM/Servo Hat
-3. TS néoLED driver</options></input><input type="%s"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>shield</l><l>opts</l></list><l>&#xD;						window.ext_tools.addShield(boardID, shield, opts);&#xD;					</l></block><list><block var="boardID"/><block var="shield"/><block var="opts"/></list></block></script></block-definition><block-definition s="Déclarer E/S numérique sur la carte %&apos;boardID&apos; en %&apos;digitPin&apos; mettre %&apos;moduleDigit&apos; ( %&apos;opts&apos; )" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module numérique Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove sur un port numérique.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%txt" readonly="true">Choisir un module<options>1. Grove LED
-2. Grove Relais
-3. Grove Button
-4. Grove Buzzer
-5. Grove Chainable RGB LED
-6. Grove LED Bar
-7. Grove 4 Digit Display
-8. Grove UltraSonic
-9. Grove DHT Digital Sensor
-10. Grove PIR Motion Sensor
-11. Grove Line Finder</options></input><input type="%s"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>moduleDigit</l><l>opts</l></list><l>&#xD;						window.ext_tools.setDigitPin(boardID, digitPin, moduleDigit, opts);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="moduleDigit"/><block var="opts"/></list></block></script></block-definition><block-definition s="Déclarer E/S analogique sur la carte %&apos;boardID&apos; en %&apos;analogPin&apos; mettre %&apos;moduleAnalog&apos; ( %&apos;opts&apos; )" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module analogique Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove sur un port analogique.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>A0
-A1
-A2</options></input><input type="%txt" readonly="true">Choisir un module<options>1. Grove Rotor Position
-2. Grove Light Sensor
-3. Grove Thermometer
-4. Grove Joystick</options></input><input type="%s"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>analogPin</l><l>moduleAnalog</l><l>opts</l></list><l>&#xD;						window.ext_tools.setAnalogPin(boardID, analogPin, moduleAnalog, opts);&#xD;					</l></block><list><block var="boardID"/><block var="analogPin"/><block var="moduleAnalog"/><block var="opts"/></list></block></script></block-definition><block-definition s="Déclarer E/S série sur la carte %&apos;boardID&apos; mettre %&apos;moduleMode&apos; ( %&apos;opts&apos; )" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove i2c ou série.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir un module<options>1. Grove-LCD RGB Backlight
-2. Grove oLed 128x64
-3. Grove oLed 96x96
-4. Grove-GPS
-5. Grove Step Motor Driver
-6. Grove miniTrackBall</options></input><input type="%s"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>moduleMode</l><l>opts</l></list><l>&#xD;						window.ext_tools.setModuleMode(boardID, moduleMode, opts);&#xD;					</l></block><list><block var="boardID"/><block var="moduleMode"/><block var="opts"/></list></block></script></block-definition><block-definition s="Déclarer une matrice sur la carte %&apos;boardID&apos; de %&apos;width&apos; x %&apos;height&apos; leds sur la sortie %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: Initialiser la matrice.&#xD;&#xD;Premet d&apos;initialiser une matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">40</input><input type="%n">15</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>width</l><l>height</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.initLed(boardID, ledPin, width, height);&#xD;					</l></block><list><block var="boardID"/><block var="width"/><block var="height"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Placer la sortie numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; à la valeur %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: fixer une valeur numérique.&#xD;&#xD;Premet fixer l&apos;état d&apos;un module de sortie numérique.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%txt" readonly="true">Off<options>Off
-On</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>val</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						val = (val=="Off")?0:1;&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;digitWrite&apos;, boardID, digitPin+&apos;/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="val"/></list></block></script></block-definition><block-definition s="Fixer la led chainable de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; à la position %&apos;num&apos; à la couleur %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Fixer la couleur de la LED.&#xD;&#xD;Premet de fixer la couleur d&apos;une chainable LED.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%n"></input><input type="%n"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>num</l><l>val</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						num = parseInt(num)-1;&#xD;						val = parseInt(val);&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;CLED&apos;, boardID, digitPin+&apos;/set/&apos;+num+&apos;/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="num"/><block var="val"/></list></block></script></block-definition><block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; mettre la LED %&apos;num&apos; à %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: modifier bargraphe.&#xD;&#xD;Premet d&apos;allumer ou d&apos;éteindre une diode du bargraphe.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Off<options>Off
-On</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>num</l><l>val</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						num = parseInt(num);&#xD;						val = (val=="Off")?0:1;&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/set/&apos;+num+&apos;/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="num"/><block var="val"/></list></block></script></block-definition><block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; afficher le score %&apos;val&apos; / %&apos;max&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: afficher le score sur le bargraphe.&#xD;&#xD;Permet d&apos;afficher une score sur le bargraphe.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%n">1</input><input type="%n">10</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>val</l><l>max</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						val = parseInt(val);&#xD;						max = parseInt(max);&#xD;						if(max&lt;1) max=1;&#xD;						if(val&lt;0) val=0;&#xD;						else if(val&gt;max) val=max;&#xD;						val = Math.round(10*val/max);&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/level/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="val"/><block var="max"/></list></block></script></block-definition><block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; faire %&apos;cmd&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: agir sur bargraphe.&#xD;&#xD;Premet d&apos;effectuer une action sur le bargraphe.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%txt" readonly="true">Choisir une action<options>1. Effacer
-2. Rouge premier
-3. Rouge dernier
-4. Allumer tout</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>cmd</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						var cmd2str = {&#xD;							&apos;1&apos;: &apos;clear&apos;,&#xD;							&apos;2&apos;: &apos;redFirst&apos;,&#xD;							&apos;3&apos;: &apos;redLast&apos;,&#xD;							&apos;4&apos;: &apos;full&apos;,&#xD;						};&#xD;						if(!Number.isNaN(digitPin) &amp;&amp; cmd2str[cmd[0]]!=undefined)&#xD;							window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/&apos;+cmd2str[cmd[0]]);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="cmd"/></list></block></script></block-definition><block-definition s="Afficheur 4 digits de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; afficher %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: afficher sur 4 digit display.&#xD;&#xD;Premet d&apos;afficher sur l&apos;écran 4 chiffres 7 segments de Grove.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%txt">00:00</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>val</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;4DD&apos;, boardID, digitPin+&apos;/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="digitPin"/><block var="val"/></list></block></script></block-definition><block-definition s="Écran LCD de la carte %&apos;boardID&apos; écrire %&apos;l1&apos; %&apos;l2&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: écrire sur l&apos;écran LCD.&#xD;&#xD;Premet de remplacer les deux lignes de l&apos;écran LCD.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt">Ligne 1</input><input type="%txt">Ligne 2</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>l1</l><l>l2</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						l1 = window.ext_tools.encodeText(l1);&#xD;						l2 = window.ext_tools.encodeText(l2);&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;print/&apos;+l1+&apos;/&apos;+l2);&#xD;					</l></block><list><block var="boardID"/><block var="l1"/><block var="l2"/></list></block></script></block-definition><block-definition s="Écran LCD de la carte %&apos;boardID&apos; éclairage de couleur %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: LCD fixer l&apos;éclairage.&#xD;&#xD;Premet fixer la couleur et l&apos;intensité de l&apos;éclairage.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">0</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>val</l></list><l>&#xD;						digitPin = parseInt(digitPin[1]);&#xD;						val = parseInt(val);&#xD;						if(!Number.isNaN(digitPin))&#xD;							window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;color/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="val"/></list></block></script></block-definition><block-definition s="Écran LCD de la carte %&apos;boardID&apos; faire %&apos;cmd&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: agir sur LCD.&#xD;&#xD;Faire une action sur l&apos;écran LCD.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une action<options>1. Effacer l'écran
-2. Faire clignoter le curseur
-3. Faire clignoter l'écran
-4. Stopper le clig. du curseur
-5. Stopper le clig. de l'écran</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>cmd</l></list><l>&#xD;						var cmd2str = {&#xD;							&apos;1&apos;: &apos;LCDclear&apos;,&#xD;							&apos;2&apos;: &apos;LCDblink&apos;,&#xD;							&apos;3&apos;: &apos;LCDblinkLed&apos;,&#xD;							&apos;4&apos;: &apos;LCDnoblink&apos;,&#xD;							&apos;5&apos;: &apos;LCDnoblinkLed&apos;,&#xD;						};&#xD;						cmd = cmd.split(&apos;.&apos;);&#xD;						if(cmd2str[cmd[0]]!=undefined)&#xD;							window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;set/&apos;+cmd[0]);&#xD;					</l></block><list><block var="boardID"/><block var="cmd"/></list></block></script></block-definition><block-definition s="Écran oLed de la carte %&apos;boardID&apos; écrire %&apos;val&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: écrire sur l&apos;écran oLed.&#xD;&#xD;Permet d&apos;écrire sur l&apos;écran oLed à la position courante du curseur.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>val</l></list><l>&#xD;						val = window.ext_tools.encodeText(val);&#xD;						window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;print/&apos;+val);&#xD;					</l></block><list><block var="boardID"/><block var="val"/></list></block></script></block-definition><block-definition s="Écran de la carte %&apos;boardID&apos; placer le curseur en %&apos;x&apos; ; %&apos;y&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: déplacer le curseur sur l&apos;écran oLed.&#xD;&#xD;Permet de positionner le curseur sur l&apos;écran oLed.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n"></input><input type="%n"></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x</l><l>y</l></list><l>&#xD;						window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;move/&apos;+x+&apos;/&apos;+y);&#xD;					</l></block><list><block var="boardID"/><block var="val"/></list></block></script></block-definition><block-definition s="Écran oLed de la carte %&apos;boardID&apos; éffacer l&apos;écran." type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: éffacer l&apos;écran oLed.&#xD;&#xD;Premet d&apos;éffacer l&apos;écran oLed et de replacer le cursseur en haut à gauche de celui-ci.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l></list><l>&#xD;						window.ext_tools.sendOrder(&apos;oLed&apos;, boardID, &apos;clear&apos;);&#xD;					</l></block><list><block var="boardID"/></list></block></script></block-definition><block-definition s="Écran oLed de la carte %&apos;boardID&apos; régler le contraste à %&apos;bright&apos; ." type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: régler le contraste.&#xD;&#xD;Premet de régler le contraste de l&apos;écran oLed.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">100</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>bright</l></list><l>&#xD;						window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;bright/&apos;+parseInt(bright));&#xD;					</l></block><list><block var="boardID"/><block var="bright"/></list></block></script></block-definition><block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; définir comme %&apos;mode&apos; ." type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: régler le fonctionnement.&#xD;&#xD;Premet de régler le fonctionnement du carte pilote pour moteur pas-à-pas.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">5</input><input type="%txt">1. Pas-à-pas<options>1. Pas-à-pas
-2. Demi-pas
-3. Max-de-puissance
-4. Deux moteurs</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>mode</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						mode = mode.split(&apos;.&apos;);&#xD;						window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/mode/&apos;+mode[0]);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="mode"/></list></block></script></block-definition><block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; faire avancer de %&apos;pas&apos; pas." type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: faire avancer.&#xD;&#xD;Premet de faire avancer le moteur d&apos;un nombre de pas.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">5</input><input type="%n">20</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>pas</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						pas = parseInt(pas);&#xD;						window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/walk/&apos;+pas);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="pas"/></list></block></script></block-definition><block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; stopper." type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: stopper moteur.&#xD;&#xD;Premet de stopper le moteur pas-à-pas.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">5</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/break&apos;);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/></list></block></script></block-definition><block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; démarrer le moteur %&apos;mot&apos; à la puissance %&apos;pui&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: démarrer moteur.&#xD;&#xD;Premet de démarrer un moteur de la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">5</input><input type="%n">1<options>1
-2</options></input><input type="%n">255</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>mot</l><l>pui</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						mot = parseInt(mot);&#xD;						pui = parseInt(pui);&#xD;						window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/start/&apos;+mot+&apos;/&apos;+pui);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="mot"/><block var="pui"/></list></block></script></block-definition><block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; stopper le moteur %&apos;mot&apos;" type="command" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: stopper moteur.&#xD;&#xD;Premet de stopper un moteur de la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">5</input><input type="%n">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>mot</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						mot = parseInt(mot);&#xD;						pui = parseInt(pui);&#xD;						window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/stop/&apos;+mot);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="mot"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; affecter à la led ( %&apos;x&apos; ; %&apos;y&apos; ) la couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: affecter couleur en x,y .&#xD;&#xD;Premet d&apos;affecter une couleur à l&apos;un des points de la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">1</input><input type="%n">1</input><input type="%n">255</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x</l><l>y</l><l>col</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.setXYLed(boardID, ledPin, x, y, col);&#xD;					</l></block><list><block var="boardID"/><block var="x"/><block var="y"/><block var="col"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; tracer la ligne de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: tracer une ligne .&#xD;&#xD;Premet de tracer un segment entre deux point de la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">1</input><input type="%n">1</input><input type="%n">5</input><input type="%n">5</input><input type="%n">255</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x1</l><l>y1</l><l>x2</l><l>y2</l><l>col</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.drawLine(boardID, ledPin, x1, y1, x2, y2, col);&#xD;					</l></block><list><block var="boardID"/><block var="x1"/><block var="y1"/><block var="x2"/><block var="y2"/><block var="col"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; tracer le rectangle de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: tracer un rectangle.&#xD;&#xD;Premet de tracer un rectangle entre deux point de la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">1</input><input type="%n">1</input><input type="%n">5</input><input type="%n">5</input><input type="%n">255</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x1</l><l>y1</l><l>x2</l><l>y2</l><l>col</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.drawRect(boardID, ledPin, x1, y1, x2, y2, col);&#xD;					</l></block><list><block var="boardID"/><block var="x1"/><block var="y1"/><block var="x2"/><block var="y2"/><block var="col"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; remplir le rectangle de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: colorier un rectangle.&#xD;&#xD;Premet de tracer un rectangle plein entre deux point de la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">1</input><input type="%n">1</input><input type="%n">5</input><input type="%n">5</input><input type="%n">255</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x1</l><l>y1</l><l>x2</l><l>y2</l><l>col</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.colorRect(boardID, ledPin, x1, y1, x2, y2, col);&#xD;					</l></block><list><block var="boardID"/><block var="x1"/><block var="y1"/><block var="x2"/><block var="y2"/><block var="col"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; écrire en ( %&apos;x&apos; ; %&apos;y&apos; ) le text %&apos;txt&apos; de la couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: écrire du texte.&#xD;&#xD;Premet d&apos;écrire du texte sur la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">1</input><input type="%n">1</input><input type="%txt">texte</input><input type="%n">255</input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>x</l><l>y</l><l>txt</l><l>col</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.drawTxt(boardID, ledPin, x, y, txt, col);&#xD;					</l></block><list><block var="boardID"/><block var="x"/><block var="y"/><block var="txt"/><block var="col"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; afficher le résultat de la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: afficher le résultat.&#xD;&#xD;Premet d&apos;afficher le résultat de l&apos;image construite pour la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.fixeLeds(boardID, ledPin);&#xD;					</l></block><list><block var="boardID"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; réinitialiser la matrice %&apos;ledPin&apos;" type="command" category="matrix"><comment x="0" y="0" w="276" collapsed="false">Matrice: remise à zéro.&#xD;&#xD;Premet de réinitialiser la matrice de néoLeds.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n" readonly="true">1<options>1
-2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>ledPin</l></list><l>&#xD;						window.ext_tools.resetLed(boardID, ledPin);&#xD;					</l></block><list><block var="boardID"/><block var="ledPin"/></list></block></script></block-definition><block-definition s="Calculer RVB %&apos;rouge&apos; %&apos;vert&apos; %&apos;bleu&apos;" type="reporter" category="matrix"><header></header><code></code><inputs><input type="%s"></input><input type="%s"></input><input type="%s"></input></inputs><script><block s="doReport"><block s="reportSum"><block var="bleu"/><block s="reportProduct"><block s="reportSum"><block var="vert"/><block s="reportProduct"><block var="rouge"/><l>256</l></block></block><l>256</l></block></block></block></script></block-definition><block-definition s="État numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos;" type="predicate" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée numérique.&#xD;&#xD;Premet le lire l&apos;état d&apos;un capteur numérique simple.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doReport"><block s="evaluate"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l></list><l>&#xD;							return parseInt(window.ext_tools.getSensorData(boardID, digitPin))==1;&#xD;						</l></block><list><block var="boardID"/><block var="digitPin"/></list></block></block></script></block-definition><block-definition s="État analogique de la carte %&apos;boardID&apos; en %&apos;analogPin&apos;" type="reporter" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée analogique.&#xD;&#xD;Premet le lire l&apos;état d&apos;un capteur analogique simple.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>A0
-A1
-A2</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doReport"><block s="evaluate"><block s="reportJSFunction"><list><l>boardID</l><l>analogPin</l></list><l>&#xD;							return window.ext_tools.getSensorData(boardID, analogPin);&#xD;						</l></block><list><block var="boardID"/><block var="analogPin"/></list></block></block></script></block-definition><block-definition s="État de la carte %&apos;boardID&apos; pour %&apos;modValue&apos;" type="reporter" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module.&#xD;&#xD;Premet le lire une valeur retourné par un module i2c ou série.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une valeur<options>1. GPS Latitude
-2. GPS Longitude
-3. GPS Nb satelites
-4. TrackBall Haut
-5. TrackBall Bas
-6. TrackBall Gauche
-7. TrackBall Droite
-8. TrackBall Confirmer</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doReport"><block s="evaluate"><block s="reportJSFunction"><list><l>boardID</l><l>modValue</l></list><l>&#xD;							return window.ext_tools.getModValue(boardID, modValue);&#xD;						</l></block><list><block var="boardID"/><block var="modValue"/></list></block></block></script></block-definition><block-definition s="Valeur numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; pour la valeur %&apos;value&apos;" type="reporter" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module numérique.&#xD;&#xD;Premet le lire une valeur retourné par un module numérique.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>D2
-D3
-D4
-D5
-D6
-D7
-D8</options></input><input type="%txt" readonly="true">Choisir une valeur<options>1. Distance sonar
-2. Température
-3. Humidité</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doReport"><block s="evaluate"><block s="reportJSFunction"><list><l>boardID</l><l>digitPin</l><l>value</l></list><l>&#xD;							return window.ext_tools.getDigitValue(boardID, digitPin, value);&#xD;						</l></block><list><block var="boardID"/><block var="digitPin"/><block var="value"/></list></block></block></script></block-definition><block-definition s="Valeur analogique de la carte %&apos;boardID&apos; en %&apos;analogPin&apos; pour la valeur %&apos;value&apos;" type="reporter" category="grove"><comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module analogique.&#xD;&#xD;Premet le lire une valeur retourné par un module analogique.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%txt" readonly="true">Choisir une E/S<options>A0
-A1
-A2</options></input><input type="%txt" readonly="true">Choisir une valeur<options>1. Joystick X
-2. Joystick Y
-3. Joystick Push</options></input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doReport"><block s="evaluate"><block s="reportJSFunction"><list><l>boardID</l><l>analogPin</l><l>value</l></list><l>&#xD;							return window.ext_tools.getAnalogValue(boardID, analogPin, value);&#xD;						</l></block><list><block var="boardID"/><block var="analogPin"/><block var="value"/></list></block></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Alimenter le moteur %&apos;mot&apos; avec %&apos;pui&apos;" type="command" category="pwmpihat"><comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Alimenter le moteur.&#xD;&#xD;Premet de démarrer un moteur de la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">64</input><input type="%n">1</input><input type="%n">100</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>mot</l><l>pui</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						mot = parseInt(mot);&#xD;						pui = parseInt(pui);&#xD;						window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/start/&apos;+mot+&apos;/&apos;+pui);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="mot"/><block var="pui"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Stopper le moteur %&apos;mot&apos;" type="command" category="pwmpihat"><comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Stopper le moteur.&#xD;&#xD;Premet de stopper un moteur de la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">64</input><input type="%n">1</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>mot</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						mot = parseInt(mot);&#xD;						window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/stop/&apos;+mot);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="mot"/></list></block></script></block-definition><block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Configurer la fréquence %&apos;freq&apos;" type="command" category="pwmpihat"><comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Configurer la fréquence moteur.&#xD;&#xD;Premet de configurer la fréquence des moteurs de la carte.</comment><header></header><code></code><inputs><input type="%n" readonly="true">1<options>1
-2
-3
-4
-5
-6
-7
-8
-9
-10</options></input><input type="%n">64</input><input type="%n">1000</input></inputs><script><custom-block s="Initialiser le service ext4snap"></custom-block><block s="doRun"><block s="reportJSFunction"><list><l>boardID</l><l>addr</l><l>freq</l></list><l>&#xD;						addr = parseInt(addr);&#xD;						freq = parseInt(freq);&#xD;						window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/freq/&apos;+freq);&#xD;					</l></block><list><block var="boardID"/><block var="addr"/><block var="freq"/></list></block></script></block-definition><block-definition s="Initialisation %&apos;ip&apos;" type="command" category="grove"><header></header><code></code><inputs><input type="%txt"></input></inputs><script><custom-block s="Connection de la carte %n Adresse IP : %txt Port : %txt"><l>1</l><block var="ip"/><l>1234</l></custom-block><custom-block s="Déclarer le shield sur la carte %n Shield : %txt ( %s )"><l>1</l><l>1. GrovePi</l><l></l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D2</l><l>1. Grove LED</l><l>16711682</l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D3</l><l>1. Grove LED</l><l>16744192</l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D4</l><l>1. Grove LED</l><l>65280</l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D5</l><l>3. Grove Button</l><l></l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D6</l><l>1. Grove LED</l><l>16711680</l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D7</l><l>1. Grove LED</l><l>16744192</l></custom-block><custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )"><l>1</l><l>D8</l><l>1. Grove LED</l><l>65280</l></custom-block><block s="doSetVar"><l>cycle</l><l>0</l></block></script></block-definition><block-definition s="Mettre rue 1 à vert" type="command" category="grove"><header></header><code></code><inputs></inputs><script><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D2</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D3</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D4</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D6</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D7</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D8</l><l>Off</l></custom-block></script></block-definition><block-definition s="Mettre rue 1 à orange" type="command" category="grove"><header></header><code></code><inputs></inputs><script><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D2</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D3</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D4</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D6</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D7</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D8</l><l>Off</l></custom-block></script></block-definition><block-definition s="Mettre rue 2 vert" type="command" category="grove"><header></header><code></code><inputs></inputs><script><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D2</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D3</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D4</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D6</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D7</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D8</l><l>On</l></custom-block></script></block-definition><block-definition s="Mettre rue 2 orange" type="command" category="grove"><header></header><code></code><inputs></inputs><script><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D2</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D3</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D4</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D6</l><l>Off</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D7</l><l>On</l></custom-block><custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt"><l>1</l><l>D8</l><l>Off</l></custom-block></script></block-definition></blocks><variables><variable name="cycle"><l>0</l></variable></variables></project>
+<project name="Carrefour" app="Snap! 4.0, http://snap.berkeley.edu" version="1">
+	<notes>
+		Simulation d'un carrefour controlé. La rue 1 reste au vert temps qu'aucun véhicule ne se présente au feu rouge de la rue 2. Un bouton poussoir permet de simuler la détection d'un véhicule devant le feu de la rue 2. Une fois un véhicule détecté, un cycle permet le passage de véhicule de la rue 2 en stoppant les véhicules sur la rue 1.
+	</notes>
+	<thumbnail>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAACYElEQVR4nO3Yr05kZxjA4b0QqkHAlYCY0cANcAEbBAaPQyDOHZCGi0DXVjEKko5EjBhBmq+qG2gyy2672R+ZPk/yiiNO8n7JLzl/Pg0IfaoX4P9NgKTeBPj8/DyWy+VPm/V6XZ2bD+JNgMvlciwWi++e1edfvmke7399e99qVZ2bD+K7A5ym6d0A//zj940RCpDXNgZ4c3MzTk5OxtXV1bi4uPhyPU3TuLy8HKenpxsDfPntVoB8k40BXl9fj+Pj47FYLMbOzs6X62maxvn5+Tg7OxMg/9m7j+D7+/vx8PDwQ94BBcg//ZCPkH87AuRNgOv1eqxWq582Ly8v1bn5IPyIJiVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAtxgb29v3N7e1mtsPQF+xXw+H7PZbMxms7G/vz8eHx/rlbaOAN/xd4CvZz6fj6Ojo3q1rSDAd2wK8PDwsF5tKwjwK14/gg8ODsbT01O90tYR4Aa7u7vj7u6uXmPrCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkNRfGWQTfQ/3GUkAAAAASUVORK5CYII=</thumbnail>
+	<stage name="Scène" width="480" height="360" costume="0" tempo="60" threadsafe="false" lines="round" codify="false" inheritance="false" sublistIDs="false" scheduled="false" id="1">
+		<pentrails>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAFoCAYAAACPNyggAAACtUlEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+Bo3+AAF/RMkcAAAAAElFTkSuQmCC</pentrails>
+		<costumes>
+			<list id="2"></list>
+		</costumes>
+		<sounds>
+			<list id="3"></list>
+		</sounds>
+		<variables></variables>
+		<blocks></blocks>
+		<scripts></scripts>
+		<sprites>
+			<sprite name="Lutin" idx="1" x="0" y="0" heading="90" scale="1" rotation="1" draggable="true" costume="0" color="80,80,80" pen="tip" id="8">
+				<costumes>
+					<list id="9"></list>
+				</costumes>
+				<sounds>
+					<list id="10"></list>
+				</sounds>
+				<variables></variables>
+				<blocks></blocks>
+				<scripts>
+					<script x="13" y="14">
+						<block s="receiveGo"></block>
+						<custom-block s="Initialisation %txt">
+							<l>virtual</l>
+						</custom-block>
+						<custom-block s="Mettre rue 1 à vert"></custom-block>
+					</script>
+					<script x="246" y="10">
+						<block s="receiveCondition">
+							<custom-block s="État numérique de la carte %n en %txt">
+								<l>1</l>
+								<l>D5</l>
+							</custom-block>
+						</block>
+						<block s="doIf">
+							<block s="reportEquals">
+								<block var="cycle"/>
+								<l>0</l>
+							</block>
+							<script>
+								<block s="doSetVar">
+									<l>cycle</l>
+									<l>1</l>
+								</block>
+								<block s="doWait">
+									<l>2</l>
+								</block>
+								<custom-block s="Mettre rue 1 à orange"></custom-block>
+								<block s="doWait">
+									<l>3</l>
+								</block>
+								<custom-block s="Mettre rue 2 vert"></custom-block>
+								<block s="doWait">
+									<l>5</l>
+								</block>
+								<custom-block s="Mettre rue 2 orange"></custom-block>
+								<block s="doWait">
+									<l>3</l>
+								</block>
+								<custom-block s="Mettre rue 1 à vert"></custom-block>
+								<block s="doWait">
+									<l>7</l>
+								</block>
+								<block s="doSetVar">
+									<l>cycle</l>
+									<l>0</l>
+								</block>
+							</script>
+						</block>
+					</script>
+				</scripts>
+			</sprite>
+			<watcher var="cycle" style="normal" x="10" y="10" color="243,118,29"/>
+		</sprites>
+	</stage>
+	<hidden></hidden>
+	<headers></headers>
+	<code></code>
+	<blocks>
+		<block-definition s="Initialiser le service ext4snap" type="command" category="other">
+			<comment x="0" y="0" w="340" collapsed="false">Initialiser le service ext4snap&#xD;&#xD;Permet de charger les scripts nécessaires au fonctionnement des autres blocs. L&apos;appel de ce bloc est automatiquement fait avant tout autres blocs, il n&apos;est donc pas nécessaire de le placer avant de les utiliser.</comment>
+			<header></header>
+			<code></code>
+			<inputs></inputs>
+			<script>
+				<block s="doIfElse">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list></list>
+							<l>return window.ext4snap===true;</l>
+						</block>
+						<list></list>
+					</block>
+					<script>
+						<block s="doRun">
+							<block s="reportJSFunction">
+								<list></list>
+								<l>window.ext_tools.trace(1, "trace-init");</l>
+							</block>
+							<list></list>
+						</block>
+					</script>
+					<script>
+						<block s="doRun">
+							<block s="reportJSFunction">
+								<list></list>
+								<l>
+									console.log("Initialisation du service ext4snap.");
+
+									var s = document.createElement(&apos;script&apos;);
+									s.type = &apos;text/javascript&apos;;
+									s.src = &apos;lib/ext4snap.js&apos;;
+									document.getElementsByTagName("head")[0].appendChild(s);
+								</l>
+							</block>
+							<list></list>
+						</block>
+						<block s="doUntil">
+							<block s="evaluate">
+								<block s="reportJSFunction">
+									<list></list>
+									<l>return window.ext4snap===true;</l>
+								</block>
+								<list></list>
+							</block>
+							<script>
+								<block s="doWait">
+									<l>1</l>
+								</block>
+							</script>
+						</block>
+					</script>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Connection de la carte %&apos;boardID&apos; Adresse IP : %&apos;ipAddress&apos; Port : %&apos;port&apos;" type="command" category="piext">
+			<comment x="0" y="0" w="276" collapsed="false">Attribuer à une carte, son adresse IP et son port.&#xD;&#xD;L&apos;adresse IP et le port permet d&apos;associer un serveur piext à la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt">virtual</input>
+				<input type="%txt">1234</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>ipAddress</l>
+							<l>port</l>
+							<l>process</l>
+						</list>
+						<l>
+							window.ext_tools.setBoard(boardID, ipAddress, port, function(etat) {
+								if(etat) process.resume();
+								else process.stop();
+							});
+							process.pause();
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="ipAddress"/>
+						<block var="port"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Déclarer le shield sur la carte %&apos;boardID&apos; Shield : %&apos;shield&apos; ( %&apos;opts&apos; )" type="command" category="piext">
+			<comment x="0" y="0" w="276" collapsed="false">Affecter un shield à la carte.&#xD;&#xD;Définir un shield pour permettre son initialisation sur la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une carte<options>1. GrovePi&#xD;2. PWM/Servo Hat&#xD;3. TS néoLED driver</options></input>
+				<input type="%s"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>shield</l>
+							<l>opts</l>
+						</list>
+						<l>
+							window.ext_tools.addShield(boardID, shield, opts);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="shield"/>
+						<block var="opts"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Déclarer E/S numérique sur la carte %&apos;boardID&apos; en %&apos;digitPin&apos; mettre %&apos;moduleDigit&apos; ( %&apos;opts&apos; )" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module numérique Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove sur un port numérique.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%txt" readonly="true">Choisir un module<options>1. Grove LED&#xD;2. Grove Relais&#xD;3. Grove Button&#xD;4. Grove Buzzer&#xD;5. Grove Chainable RGB LED&#xD;6. Grove LED Bar&#xD;7. Grove 4 Digit Display&#xD;8. Grove UltraSonic&#xD;9. Grove DHT Digital Sensor&#xD;10. Grove PIR Motion Sensor&#xD;11. Grove Line Finder</options></input>
+				<input type="%s"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>moduleDigit</l>
+							<l>opts</l>
+						</list>
+						<l>
+							window.ext_tools.setDigitPin(boardID, digitPin, moduleDigit, opts);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="moduleDigit"/>
+						<block var="opts"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Déclarer E/S analogique sur la carte %&apos;boardID&apos; en %&apos;analogPin&apos; mettre %&apos;moduleAnalog&apos; ( %&apos;opts&apos; )" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module analogique Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove sur un port analogique.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>A0&#xD;A1&#xD;A2</options></input>
+				<input type="%txt" readonly="true">Choisir un module<options>1. Grove Rotor Position&#xD;2. Grove Light Sensor&#xD;3. Grove Thermometer&#xD;4. Grove Joystick</options></input>
+				<input type="%s"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>analogPin</l>
+							<l>moduleAnalog</l>
+							<l>opts</l>
+						</list>
+						<l>
+							window.ext_tools.setAnalogPin(boardID, analogPin, moduleAnalog, opts);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="analogPin"/>
+						<block var="moduleAnalog"/>
+						<block var="opts"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Déclarer E/S série sur la carte %&apos;boardID&apos; mettre %&apos;moduleMode&apos; ( %&apos;opts&apos; )" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Définir un module Grove.&#xD;&#xD;Premet d&apos;initialiser un module grove i2c ou série.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir un module<options>1. Grove-LCD RGB Backlight&#xD;2. Grove oLed 128x64&#xD;3. Grove oLed 96x96&#xD;4. Grove-GPS&#xD;5. Grove Step Motor Driver&#xD;6. Grove miniTrackBall</options></input>
+				<input type="%s"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>moduleMode</l>
+							<l>opts</l>
+						</list>
+						<l>
+							window.ext_tools.setModuleMode(boardID, moduleMode, opts);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="moduleMode"/>
+						<block var="opts"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Déclarer une matrice sur la carte %&apos;boardID&apos; de %&apos;width&apos; x %&apos;height&apos; leds sur la sortie %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: Initialiser la matrice.&#xD;&#xD;Premet d&apos;initialiser une matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">40</input>
+				<input type="%n">15</input>
+				<input type="%n" readonly="true">1<options>1&#xD;2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>width</l>
+							<l>height</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.initLed(boardID, ledPin, width, height);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="width"/>
+						<block var="height"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Placer la sortie numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; à la valeur %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: fixer une valeur numérique.&#xD;&#xD;Premet fixer l&apos;état d&apos;un module de sortie numérique.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%txt" readonly="true">Off<options>Off&#xD;On</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>val</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							val = (val=="Off")?0:1;
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;digitWrite&apos;, boardID, digitPin+&apos;/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+
+		<block-definition s="Fixer la led chainable de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; à la position %&apos;num&apos; à la couleur %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Fixer la couleur de la LED.&#xD;&#xD;Premet de fixer la couleur d&apos;une chainable LED.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%n"></input>
+				<input type="%n"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>num</l>
+							<l>val</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							num = parseInt(num)-1;
+							val = parseInt(val);
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;CLED&apos;, boardID, digitPin+&apos;/set/&apos;+num+&apos;/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="num"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; mettre la LED %&apos;num&apos; à %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: modifier bargraphe.&#xD;&#xD;Premet d&apos;allumer ou d&apos;éteindre une diode du bargraphe.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Off<options>Off&#xD;On</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>num</l>
+							<l>val</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							num = parseInt(num);
+							val = (val=="Off")?0:1;
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/set/&apos;+num+&apos;/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="num"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; afficher le score %&apos;val&apos; / %&apos;max&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: afficher le score sur le bargraphe.&#xD;&#xD;Permet d&apos;afficher une score sur le bargraphe.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%n">1</input>
+				<input type="%n">10</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>val</l>
+							<l>max</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							val = parseInt(val);
+							max = parseInt(max);
+							if(max&lt;1) max=1;
+							if(val&lt;0) val=0;
+							else if(val&gt;max) val=max;
+							val = Math.round(10*val/max);
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/level/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="val"/>
+						<block var="max"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Bargraphe de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; faire %&apos;cmd&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: agir sur bargraphe.&#xD;&#xD;Premet d&apos;effectuer une action sur le bargraphe.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%txt" readonly="true">Choisir une action<options>1. Effacer&#xD;2. Rouge premier&#xD;3. Rouge dernier&#xD;4. Allumer tout</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>cmd</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							var cmd2str = {
+								&apos;1&apos;: &apos;clear&apos;,
+								&apos;2&apos;: &apos;redFirst&apos;,
+								&apos;3&apos;: &apos;redLast&apos;,
+								&apos;4&apos;: &apos;full&apos;,
+							};
+							if(!Number.isNaN(digitPin) &amp;&amp; cmd2str[cmd[0]]!=undefined)
+								window.ext_tools.sendOrder(&apos;LBar&apos;, boardID, digitPin+&apos;/&apos;+cmd2str[cmd[0]]);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="cmd"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Afficheur 4 digits de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; afficher %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: afficher sur 4 digit display.&#xD;&#xD;Premet d&apos;afficher sur l&apos;écran 4 chiffres 7 segments de Grove.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%txt">00:00</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>digitPin</l>
+							<l>val</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;4DD&apos;, boardID, digitPin+&apos;/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="digitPin"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran LCD de la carte %&apos;boardID&apos; écrire %&apos;l1&apos; %&apos;l2&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: écrire sur l&apos;écran LCD.
+
+Premet de remplacer les deux lignes de l&apos;écran LCD.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt">Ligne 1</input>
+				<input type="%txt">Ligne 2</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>l1</l>
+							<l>l2</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							l1 = window.ext_tools.encodeText(l1);
+							l2 = window.ext_tools.encodeText(l2);
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;print/&apos;+l1+&apos;/&apos;+l2);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="l1"/>
+						<block var="l2"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran LCD de la carte %&apos;boardID&apos; éclairage de couleur %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: LCD fixer l&apos;éclairage.&#xD;&#xD;Premet fixer la couleur et l&apos;intensité de l&apos;éclairage.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">0</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>val</l>
+						</list>
+						<l>
+							digitPin = parseInt(digitPin[1]);
+							val = parseInt(val);
+							if(!Number.isNaN(digitPin))
+								window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;color/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran LCD de la carte %&apos;boardID&apos; faire %&apos;cmd&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: agir sur LCD.
+
+Faire une action sur l&apos;écran LCD.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une action<options>1. Effacer l'écran&#xD;2. Faire clignoter le curseur&#xD;3. Faire clignoter l'écran&#xD;4. Stopper le clig. du curseur&#xD;5. Stopper le clig. de l'écran</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>cmd</l>
+						</list>
+						<l>
+							var cmd2str = {
+								&apos;1&apos;: &apos;LCDclear&apos;,
+								&apos;2&apos;: &apos;LCDblink&apos;,
+								&apos;3&apos;: &apos;LCDblinkLed&apos;,
+								&apos;4&apos;: &apos;LCDnoblink&apos;,
+								&apos;5&apos;: &apos;LCDnoblinkLed&apos;,
+							};
+							cmd = cmd.split(&apos;.&apos;);
+							if(cmd2str[cmd[0]]!=undefined)
+								window.ext_tools.sendOrder(&apos;LCD&apos;, boardID, &apos;set/&apos;+cmd[0]);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="cmd"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran oLed de la carte %&apos;boardID&apos; écrire %&apos;val&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: écrire sur l&apos;écran oLed.&#xD;&#xD;Permet d&apos;écrire sur l&apos;écran oLed à la position courante du curseur.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>val</l>
+						</list>
+						<l>
+							val = window.ext_tools.encodeText(val);
+							window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;print/&apos;+val);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran de la carte %&apos;boardID&apos; placer le curseur en %&apos;x&apos; ; %&apos;y&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: déplacer le curseur sur l&apos;écran oLed.&#xD;&#xD;Permet de positionner le curseur sur l&apos;écran oLed.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n"></input>
+				<input type="%n"></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x</l>
+							<l>y</l>
+						</list>
+						<l>
+							window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;move/&apos;+x+&apos;/&apos;+y);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="val"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran oLed de la carte %&apos;boardID&apos; éffacer l&apos;écran." type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: éffacer l&apos;écran oLed.&#xD;&#xD;Premet d&apos;éffacer l&apos;écran oLed et de replacer le cursseur en haut à gauche de celui-ci.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+					<list>
+<l>boardID</l></list>
+<l>
+						window.ext_tools.sendOrder(&apos;oLed&apos;, boardID, &apos;clear&apos;);
+					</l></block>
+					<list>
+						<block var="boardID"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Écran oLed de la carte %&apos;boardID&apos; régler le contraste à %&apos;bright&apos; ." type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: régler le contraste.&#xD;&#xD;Premet de régler le contraste de l&apos;écran oLed.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">100</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>bright</l>
+						</list>
+						<l>
+							window.ext_tools.sendOrder(&apos;oLED&apos;, boardID, &apos;bright/&apos;+parseInt(bright));
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="bright"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; définir comme %&apos;mode&apos; ." type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: régler le fonctionnement.&#xD;&#xD;Premet de régler le fonctionnement du carte pilote pour moteur pas-à-pas.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">5</input>
+				<input type="%txt">1. Pas-à-pas<options>1. Pas-à-pas&#xD;2. Demi-pas&#xD;3. Max-de-puissance&#xD;4. Deux moteurs</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>mode</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							mode = mode.split(&apos;.&apos;);
+							window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/mode/&apos;+mode[0]);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="mode"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; faire avancer de %&apos;pas&apos; pas." type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: faire avancer.&#xD;&#xD;Premet de faire avancer le moteur d&apos;un nombre de pas.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">5</input>
+				<input type="%n">20</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>pas</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							pas = parseInt(pas);
+							window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/walk/&apos;+pas);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="pas"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; stopper." type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: stopper moteur.&#xD;&#xD;Premet de stopper le moteur pas-à-pas.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">5</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/break&apos;);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; démarrer le moteur %&apos;mot&apos; à la puissance %&apos;pui&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: démarrer moteur.&#xD;&#xD;Premet de démarrer un moteur de la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">5</input>
+				<input type="%n">1<options>1
+2</options></input>
+				<input type="%n">255</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>mot</l>
+							<l>pui</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							mot = parseInt(mot);
+							pui = parseInt(pui);
+							window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/start/&apos;+mot+&apos;/&apos;+pui);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="mot"/>
+						<block var="pui"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Pilote moteur de la carte %&apos;boardID&apos; en %&apos;addr&apos; stopper le moteur %&apos;mot&apos;" type="command" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: stopper moteur.&#xD;&#xD;Premet de stopper un moteur de la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">5</input>
+				<input type="%n">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>mot</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							mot = parseInt(mot);
+							pui = parseInt(pui);
+							window.ext_tools.sendOrder(&apos;SMD&apos;, boardID, addr+&apos;/stop/&apos;+mot);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="mot"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; affecter à la led ( %&apos;x&apos; ; %&apos;y&apos; ) la couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: affecter couleur en x,y .&#xD;&#xD;Premet d&apos;affecter une couleur à l&apos;un des points de la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">1</input>
+				<input type="%n">1</input>
+				<input type="%n">255</input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x</l>
+							<l>y</l>
+							<l>col</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.setXYLed(boardID, ledPin, x, y, col);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="x"/>
+						<block var="y"/>
+						<block var="col"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; tracer la ligne de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: tracer une ligne .&#xD;&#xD;Premet de tracer un segment entre deux point de la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">1</input>
+				<input type="%n">1</input>
+				<input type="%n">5</input>
+				<input type="%n">5</input>
+				<input type="%n">255</input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x1</l>
+							<l>y1</l>
+							<l>x2</l>
+							<l>y2</l>
+							<l>col</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.drawLine(boardID, ledPin, x1, y1, x2, y2, col);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="x1"/>
+						<block var="y1"/>
+						<block var="x2"/>
+						<block var="y2"/>
+						<block var="col"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; tracer le rectangle de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: tracer un rectangle.&#xD;&#xD;Premet de tracer un rectangle entre deux point de la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">1</input>
+				<input type="%n">1</input>
+				<input type="%n">5</input>
+				<input type="%n">5</input>
+				<input type="%n">255</input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x1</l>
+							<l>y1</l>
+							<l>x2</l>
+							<l>y2</l>
+							<l>col</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.drawRect(boardID, ledPin, x1, y1, x2, y2, col);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="x1"/>
+						<block var="y1"/>
+						<block var="x2"/>
+						<block var="y2"/>
+						<block var="col"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+
+		<block-definition s="Carte %&apos;boardID&apos; remplir le rectangle de ( %&apos;x1&apos; ; %&apos;y1&apos; ) à ( %&apos;x2&apos; ; %&apos;y2&apos; ) de couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: colorier un rectangle.&#xD;&#xD;Premet de tracer un rectangle plein entre deux point de la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">1</input>
+				<input type="%n">1</input>
+				<input type="%n">5</input>
+				<input type="%n">5</input>
+				<input type="%n">255</input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x1</l>
+							<l>y1</l>
+							<l>x2</l>
+							<l>y2</l>
+							<l>col</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.colorRect(boardID, ledPin, x1, y1, x2, y2, col);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="x1"/>
+						<block var="y1"/>
+						<block var="x2"/>
+						<block var="y2"/>
+						<block var="col"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; écrire en ( %&apos;x&apos; ; %&apos;y&apos; ) le text %&apos;txt&apos; de la couleur %&apos;col&apos; sur la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: écrire du texte.&#xD;&#xD;Premet d&apos;écrire du texte sur la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">1</input>
+				<input type="%n">1</input>
+				<input type="%txt">texte</input>
+				<input type="%n">255</input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>x</l>
+							<l>y</l>
+							<l>txt</l>
+							<l>col</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.drawTxt(boardID, ledPin, x, y, txt, col);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="x"/>
+						<block var="y"/>
+						<block var="txt"/>
+						<block var="col"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; afficher le résultat de la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: afficher le résultat.&#xD;&#xD;Premet d&apos;afficher le résultat de l&apos;image construite pour la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.fixeLeds(boardID, ledPin);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; réinitialiser la matrice %&apos;ledPin&apos;" type="command" category="matrix">
+			<comment x="0" y="0" w="276" collapsed="false">Matrice: remise à zéro.&#xD;&#xD;Premet de réinitialiser la matrice de néoLeds.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n" readonly="true">1<options>1
+2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>ledPin</l>
+						</list>
+						<l>
+							window.ext_tools.resetLed(boardID, ledPin);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="ledPin"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Calculer RVB %&apos;rouge&apos; %&apos;vert&apos; %&apos;bleu&apos;" type="reporter" category="matrix">
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%s"></input>
+				<input type="%s"></input>
+				<input type="%s"></input>
+			</inputs>
+			<script>
+				<block s="doReport">
+					<block s="reportSum">
+						<block var="bleu"/>
+						<block s="reportProduct">
+							<block s="reportSum">
+								<block var="vert"/>
+								<block s="reportProduct">
+									<block var="rouge"/>
+									<l>256</l>
+								</block>
+							</block>
+							<l>256</l>
+						</block>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="État numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos;" type="predicate" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée numérique.&#xD;&#xD;Premet le lire l&apos;état d&apos;un capteur numérique simple.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doReport">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list>
+								<l>boardID</l>
+								<l>digitPin</l>
+							</list>
+							<l>
+								return parseInt(window.ext_tools.getSensorData(boardID, digitPin))==1;
+							</l>
+						</block>
+						<list>
+							<block var="boardID"/>
+							<block var="digitPin"/>
+						</list>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="État analogique de la carte %&apos;boardID&apos; en %&apos;analogPin&apos;" type="reporter" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée analogique.&#xD;&#xD;Premet le lire l&apos;état d&apos;un capteur analogique simple.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>A0&#xD;A1&#xD;A2</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doReport">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list>
+								<l>boardID</l>
+								<l>analogPin</l>
+							</list>
+							<l>
+								return window.ext_tools.getSensorData(boardID, analogPin);
+							</l>
+						</block>
+						<list>
+							<block var="boardID"/>
+							<block var="analogPin"/>
+						</list>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="État de la carte %&apos;boardID&apos; pour %&apos;modValue&apos;" type="reporter" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module.&#xD;&#xD;Premet le lire une valeur retourné par un module i2c ou série.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une valeur<options>1. GPS Latitude&#xD;2. GPS Longitude&#xD;3. GPS Nb satelites&#xD;4. TrackBall Haut&#xD;5. TrackBall Bas&#xD;6. TrackBall Gauche&#xD;7. TrackBall Droite&#xD;8. TrackBall Confirmer</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doReport">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list>
+								<l>boardID</l>
+								<l>modValue</l>
+							</list>
+							<l>
+								return window.ext_tools.getModValue(boardID, modValue);
+							</l>
+						</block>
+						<list>
+							<block var="boardID"/>
+							<block var="modValue"/>
+						</list>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Valeur numérique de la carte %&apos;boardID&apos; en %&apos;digitPin&apos; pour la valeur %&apos;value&apos;" type="reporter" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module numérique.&#xD;&#xD;Premet le lire une valeur retourné par un module numérique.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>D2&#xD;D3&#xD;D4&#xD;D5&#xD;D6&#xD;D7&#xD;D8</options></input>
+				<input type="%txt" readonly="true">Choisir une valeur<options>1. Distance sonar&#xD;2. Température&#xD;3. Humidité</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doReport">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list>
+								<l>boardID</l>
+								<l>digitPin</l>
+								<l>value</l>
+							</list>
+							<l>
+								return window.ext_tools.getDigitValue(boardID, digitPin, value);
+							</l>
+						</block>
+						<list>
+							<block var="boardID"/>
+							<block var="digitPin"/>
+							<block var="value"/>
+						</list>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Valeur analogique de la carte %&apos;boardID&apos; en %&apos;analogPin&apos; pour la valeur %&apos;value&apos;" type="reporter" category="grove">
+			<comment x="0" y="0" w="276" collapsed="false">Grove: Lire entrée d&apos;un module analogique.&#xD;&#xD;Premet le lire une valeur retourné par un module analogique.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%txt" readonly="true">Choisir une E/S<options>A0&#xD;A1&#xD;A2</options></input>
+				<input type="%txt" readonly="true">Choisir une valeur<options>1. Joystick X&#xD;2. Joystick Y&#xD;3. Joystick Push</options></input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doReport">
+					<block s="evaluate">
+						<block s="reportJSFunction">
+							<list>
+								<l>boardID</l>
+								<l>analogPin</l>
+								<l>value</l>
+							</list>
+							<l>
+								return window.ext_tools.getAnalogValue(boardID, analogPin, value);
+							</l>
+						</block>
+						<list>
+							<block var="boardID"/>
+							<block var="analogPin"/>
+							<block var="value"/>
+						</list>
+					</block>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Alimenter le moteur %&apos;mot&apos; avec %&apos;pui&apos;" type="command" category="pwmpihat">
+			<comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Alimenter le moteur.&#xD;&#xD;Premet de démarrer un moteur de la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">64</input>
+				<input type="%n">1</input>
+				<input type="%n">100</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>mot</l>
+							<l>pui</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							mot = parseInt(mot);
+							pui = parseInt(pui);
+							window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/start/&apos;+mot+&apos;/&apos;+pui);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="mot"/>
+						<block var="pui"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Stopper le moteur %&apos;mot&apos;" type="command" category="pwmpihat">
+			<comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Stopper le moteur.&#xD;&#xD;Premet de stopper un moteur de la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">64</input>
+				<input type="%n">1</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>mot</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							mot = parseInt(mot);
+							window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/stop/&apos;+mot);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="mot"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Carte %&apos;boardID&apos; en %&apos;addr&apos; Configurer la fréquence %&apos;freq&apos;" type="command" category="pwmpihat">
+			<comment x="0" y="0" w="276" collapsed="false">PWM Pi Hat! : Configurer la fréquence moteur.&#xD;&#xD;Premet de configurer la fréquence des moteurs de la carte.</comment>
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%n" readonly="true">1<options>1&#xD;2&#xD;3&#xD;4&#xD;5&#xD;6&#xD;7&#xD;8&#xD;9&#xD;10</options></input>
+				<input type="%n">64</input>
+				<input type="%n">1000</input>
+			</inputs>
+			<script>
+				<custom-block s="Initialiser le service ext4snap"></custom-block>
+				<block s="doRun">
+					<block s="reportJSFunction">
+						<list>
+							<l>boardID</l>
+							<l>addr</l>
+							<l>freq</l>
+						</list>
+						<l>
+							addr = parseInt(addr);
+							freq = parseInt(freq);
+							window.ext_tools.sendOrder(&apos;APH&apos;, boardID, addr+&apos;/freq/&apos;+freq);
+						</l>
+					</block>
+					<list>
+						<block var="boardID"/>
+						<block var="addr"/>
+						<block var="freq"/>
+					</list>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Initialisation %&apos;ip&apos;" type="command" category="grove">
+			<header></header>
+			<code></code>
+			<inputs>
+				<input type="%txt"></input>
+			</inputs>
+			<script>
+				<custom-block s="Connection de la carte %n Adresse IP : %txt Port : %txt">
+					<l>1</l>
+					<block var="ip"/>
+					<l>1234</l>
+				</custom-block>
+				<custom-block s="Déclarer le shield sur la carte %n Shield : %txt ( %s )">
+					<l>1</l>
+					<l>1. GrovePi</l>
+					<l></l>
+				</custom-block>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D2</l>
+					<l>1. Grove LED</l>
+					<l>16711682</l>
+				</custom-block>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D3</l>
+					<l>1. Grove LED</l>
+					<l>16744192</l>
+				</customblock>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D4</l>
+					<l>1. Grove LED</l>
+					<l>65280</l>
+				</customblock>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D5</l>
+					<l>3. Grove Button</l>
+					<l></l>
+				</customblock>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D6</l>
+					<l>1. Grove LED</l>
+					<l>16711680</l>
+				</customblock>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D7</l>
+					<l>1. Grove LED</l>
+					<l>16744192</l>
+				</customblock>
+				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
+					<l>1</l>
+					<l>D8</l>
+					<l>1. Grove LED</l>
+					<l>65280</l>
+				</customblock>
+				<block s="doSetVar">
+					<l>cycle</l>
+					<l>0</l>
+				</block>
+			</script>
+		</block-definition>
+		<block-definition s="Mettre rue 1 à vert" type="command" category="grove">
+			<header></header>
+			<code></code>
+			<inputs></inputs>
+			<script>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D2</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D3</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D4</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D6</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D7</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D8</l>
+					<l>Off</l>
+				</customblock></script>
+		</block-definition>
+		<block-definition s="Mettre rue 1 à orange" type="command" category="grove">
+			<header></header>
+			<code></code>
+			<inputs></inputs>
+			<script>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D2</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D3</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D4</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D6</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D7</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D8</l>
+					<l>Off</l>
+				</customblock></script>
+		</block-definition>
+		<block-definition s="Mettre rue 2 vert" type="command" category="grove">
+			<header></header>
+			<code></code>
+			<inputs></inputs>
+			<script>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D2</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D3</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D4</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D6</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D7</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D8</l>
+					<l>On</l>
+				</customblock></script>
+		</block-definition>
+		<block-definition s="Mettre rue 2 orange" type="command" category="grove">
+			<header></header>
+			<code></code>
+			<inputs></inputs>
+			<script>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D2</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D3</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D4</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D6</l>
+					<l>Off</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D7</l>
+					<l>On</l>
+				</customblock>
+				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
+					<l>1</l>
+					<l>D8</l>
+					<l>Off</l>
+				</customblock>
+			</script>
+		</block-definition>
+	</blocks>
+	<variables>
+		<variable name="cycle">
+			<l>0</l>
+		</variable>
+	</variables>
+</project>
