@@ -91,10 +91,10 @@ new (function() {
 			count:0,
 		};
 
-		function addScript(scr) {
+		function addScript(src) {
 			var s = cons.document.createElement('script');
 			s.type = 'text/javascript';
-			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					remplir();
@@ -180,11 +180,11 @@ new (function() {
 				e.className = c;
 			return e;
 		}
-		function addScript(scr) {
+		function addScript(src) {
 			simulateur.init++;
 			var s = newEl('script');
 			s.type = 'text/javascript';
-			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+scr+".js";
+			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free(src);
