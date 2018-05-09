@@ -185,6 +185,7 @@ new (function() {
 			var s = newEl('script');
 			s.type = 'text/javascript';
 			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+src+".js";
+			src = 'script:'+src;
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free(src);
@@ -207,6 +208,7 @@ new (function() {
 			s.type = 'text/css';
 			s.rel = "stylesheet";
 			s.href = "https://technoblin.github.io/ext4scratchX/lib/"+src+".css";
+			src = 'style:'+src;
 			if(s.readyState) {
 				s.onreadystatechange = function() {
 					simulateur.free(src);
