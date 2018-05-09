@@ -187,15 +187,15 @@ new (function() {
 			s.src = "https://technoblin.github.io/ext4scratchX/lib/"+scr+".js";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
-					simulateur.free();
+					simulateur.free(src);
 				};
 			} else if(s.addEventListener) {
 				s.addEventListener('load', function(event) {
-					simulateur.free();
+					simulateur.free(src);
 				});
 			} else if(s.attachEvent) {
 				s.attachEvent('onload', function() {
-					simulateur.free();
+					simulateur.free(src);
 				});
 			}
 			simulateur.board.document.getElementsByTagName("head")[0].appendChild(s);
@@ -209,15 +209,15 @@ new (function() {
 			s.href = "https://technoblin.github.io/ext4scratchX/lib/"+src+".css";
 			if(s.readyState) {
 				s.onreadystatechange = function() {
-					simulateur.free();
+					simulateur.free(src);
 				};
 			} else if(s.addEventListener) {
 				s.addEventListener('load', function(event) {
-					simulateur.free();
+					simulateur.free(src);
 				});
 			} else if(s.attachEvent) {
 				s.attachEvent('onload', function() {
-					simulateur.free();
+					simulateur.free(src);
 				});
 			}
 			simulateur.board.document.getElementsByTagName("head")[0].appendChild(s);
@@ -233,9 +233,9 @@ new (function() {
 		simulateur.sendOrder = function(order, message) {
 			this.board.Modules.sendOrder(order, message);
 		};
-		simulateur.free = function() {
-console.log('newSimulateur : '+simulateur.init);
+		simulateur.free = function(src) {
 			if(--simulateur.init==0) {
+				console.log('newSimulateur.free('+src+') : '+simulateur.init);
 				callback();
 				this.board.Modules.init(ext_tools, boardID);
 			}
@@ -250,7 +250,7 @@ console.log('newSimulateur : '+simulateur.init);
 				addScript("jquery-1.11.0.min");
 				addScript("jquery-ui-1.10.4.custom.min");
 				addScript("simulateur");
-				simulateur.free();
+				simulateur.free('general');
 			} else
 				setTimeout(init, 100);
 		};
