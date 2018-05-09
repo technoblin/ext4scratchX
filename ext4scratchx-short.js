@@ -191,10 +191,16 @@ new (function() {
 					simulateur.free(src);
 				};
 			} else if(s.addEventListener) {
+				s.addEventListener('error', function(event) {
+					simulateur.free(src);
+				});
 				s.addEventListener('load', function(event) {
 					simulateur.free(src);
 				});
 			} else if(s.attachEvent) {
+				s.attachEvent('onerror', function() {
+					simulateur.free(src);
+				});
 				s.attachEvent('onload', function() {
 					simulateur.free(src);
 				});
@@ -214,10 +220,16 @@ new (function() {
 					simulateur.free(src);
 				};
 			} else if(s.addEventListener) {
+				s.addEventListener('error', function(event) {
+					simulateur.free(src);
+				});
 				s.addEventListener('load', function(event) {
 					simulateur.free(src);
 				});
 			} else if(s.attachEvent) {
+				s.attachEvent('onerror', function() {
+					simulateur.free(src);
+				});
 				s.attachEvent('onload', function() {
 					simulateur.free(src);
 				});
