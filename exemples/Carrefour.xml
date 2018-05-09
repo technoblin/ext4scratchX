@@ -1494,37 +1494,37 @@ Faire une action sur l&apos;écran LCD.</comment>
 					<l>D3</l>
 					<l>1. Grove LED</l>
 					<l>16744192</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
 					<l>1</l>
 					<l>D4</l>
 					<l>1. Grove LED</l>
 					<l>65280</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
 					<l>1</l>
 					<l>D5</l>
 					<l>3. Grove Button</l>
 					<l></l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
 					<l>1</l>
 					<l>D6</l>
 					<l>1. Grove LED</l>
 					<l>16711680</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
 					<l>1</l>
 					<l>D7</l>
 					<l>1. Grove LED</l>
 					<l>16744192</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Déclarer E/S numérique sur la carte %n en %txt mettre %txt ( %s )">
 					<l>1</l>
 					<l>D8</l>
 					<l>1. Grove LED</l>
 					<l>65280</l>
-				</customblock>
+				</custom-block>
 				<block s="doSetVar">
 					<l>cycle</l>
 					<l>0</l>
@@ -1540,32 +1540,33 @@ Faire une action sur l&apos;écran LCD.</comment>
 					<l>1</l>
 					<l>D2</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D3</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D4</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D6</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D7</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D8</l>
 					<l>Off</l>
-				</customblock></script>
+				</custom-block>
+			</script>
 		</block-definition>
 		<block-definition s="Mettre rue 1 à orange" type="command" category="grove">
 			<header></header>
@@ -1576,32 +1577,33 @@ Faire une action sur l&apos;écran LCD.</comment>
 					<l>1</l>
 					<l>D2</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D3</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D4</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D6</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D7</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D8</l>
 					<l>Off</l>
-				</customblock></script>
+				</custom-block>
+			</script>
 		</block-definition>
 		<block-definition s="Mettre rue 2 vert" type="command" category="grove">
 			<header></header>
@@ -1612,32 +1614,33 @@ Faire une action sur l&apos;écran LCD.</comment>
 					<l>1</l>
 					<l>D2</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D3</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D4</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D6</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D7</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D8</l>
 					<l>On</l>
-				</customblock></script>
+				</custom-block>
+			</script>
 		</block-definition>
 		<block-definition s="Mettre rue 2 orange" type="command" category="grove">
 			<header></header>
@@ -1648,32 +1651,32 @@ Faire une action sur l&apos;écran LCD.</comment>
 					<l>1</l>
 					<l>D2</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D3</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D4</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D6</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D7</l>
 					<l>On</l>
-				</customblock>
+				</custom-block>
 				<custom-block s="Placer la sortie numérique de la carte %n en %txt à la valeur %txt">
 					<l>1</l>
 					<l>D8</l>
 					<l>Off</l>
-				</customblock>
+				</custom-block>
 			</script>
 		</block-definition>
 	</blocks>
