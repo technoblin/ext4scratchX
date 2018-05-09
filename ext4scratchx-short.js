@@ -5,19 +5,11 @@
  * Inspiré par Xi4s v.004 du 07/11/2014 par Alan Yorinks
  * Version v.001
  *
+ * Documentations ScratchX
  * https://github.com/LLK/scratchx/wiki#load-a-javascript-file
  *
  * @author: Jean BLIN
  * @Copyright (c) 2016 Jean BLIN right reserved.
- *
-Documentation :
----------------
-Trad : Générer les mots du langage pour faciliter la traduction
-Trad.traduir('m', v{}) : Retourne la phrase m en remplacent les balises %mot par l'entrée v[mot]
-
-newSimulateur : Créer une carte virtuel pour les tests
-
-ext_tools : Outils d'interfaçage avec les serveurs piext
  *
  ******************************************************************************/
 new (function() {
@@ -242,6 +234,7 @@ new (function() {
 			this.board.Modules.sendOrder(order, message);
 		};
 		simulateur.free = function() {
+console.log('newSimulateur : '+simulateur.init);
 			if(--simulateur.init==0) {
 				callback();
 				this.board.Modules.init(ext_tools, boardID);
