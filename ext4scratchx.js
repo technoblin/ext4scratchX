@@ -1,14 +1,14 @@
 /*******************************************************************************
  * ext4ScratchX - Fr
  *
- * Créer par ethernety.net le 05/11/2016
+ * Créer par ethernety.net le 05/11/2016 <Jean BLIN>
  * Inspiré par Xi4s v.004 du 07/11/2014 par Alan Yorinks
  * Version v.001
  *
  * Documentations ScratchX
  * https://github.com/LLK/scratchx/wiki#load-a-javascript-file
  *
- * @author: Jean BLIN
+ * @author: Jean BLIN <piext@ethernety.net>
  * @Copyright (c) 2016 Jean BLIN right reserved.
  *
  ******************************************************************************/
@@ -622,12 +622,7 @@ new (function() {
 		x--, y--;
 		if(x<0 || y<0 || x>=w || y>=h) return;
 		y = h-y-1;
-		var l = y*w;
-		if(y%2==0)
-			l+= x;
-		else
-			l+= w-x-1;
-		buf[l] = value;
+		buf[x+y*w] = value;
 	};
 	ext_tools.initLed = function(boardID, pin, x, y) {
 		var leds = x*y;
