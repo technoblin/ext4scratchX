@@ -806,7 +806,7 @@ new (function() {
 		return (list.indexOf(n)!=-1);
 	};
 	ext_tools.isModuleSensor = function(n) {
-		var list = [4, 6];
+		var list = [4, 7];
 		return (list.indexOf(n)!=-1);
 	};
 	ext_tools.getModuleAddr = function(n) {
