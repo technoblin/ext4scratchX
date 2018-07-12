@@ -33,21 +33,21 @@ new (function() {
 		'err-init-board': "Il faut initialiser la carte %board avant de l'utiliser.",
 		'err-init-pin': "Il faut initialiser %msg de la carte %board sur la pin %pin.",
 		'err-led': "le bandeau à leds",
-		'err-connect': "Pas de réponse du serveur %ip:%port! Avez-vous pensé à démarrer le service piext pour la carte %board? Vérifier le service sur la carte, la connexion sur le réseau, puis essayer à nouveau.",
+		'err-connect': "Pas de réponse du serveur %ip! Avez-vous pensé à démarrer le service piext pour la carte %board? Vérifier le service sur la carte, la connexion sur le réseau, puis essayer à nouveau.",
 		'err-message': "Message retourné par la carte %board non reconu : %msg.",
 		'err-noboard': "La carte %board n'est pas rattachée à un serveur piext.",
 		'err-nomode': "Le mode %mode n'est pas reconnue par cette version de ext4ScratchX.",
 		'err-2pins': "L'initialisation d'un pilote de moteur pas à pas doit ce faire sur 2 pins différentes! Essayez à nouveau.",
 		'err-4pins': "L'initialisation d'un moteur pas à pas doit ce faire sur 4 pins différentes! Essayez à nouveau.",
 		'err-version': "La version du serveur de la carte %board n'est pas suffisante. Veuillez effectuer une mise à jour avant de poursuivre.",
-		'server-version': "Le serveur de la carte %board à l'adresse %ip:%port en est à la version %version.",
+		'server-version': "Le serveur de la carte %board à l'adresse %ip en est à la version %version.",
 		'trace-virtual': "Affectation de la carte %board au simulateur.",
-		'trace-connect': "Affectation de la carte %board au serveur piext %ip:%port.",
-		'trace-link': "Canal ouvert pour la carte %board sur le serveur %ip:%port.",
-		'trace-uplink': "Canal rataché pour la carte %board sur le serveur %ip:%port.",
+		'trace-connect': "Affectation de la carte %board au serveur piext %ip.",
+		'trace-link': "Canal ouvert pour la carte %board sur le serveur %ip.",
+		'trace-uplink': "Canal rataché pour la carte %board sur le serveur %ip.",
 		'trace-nblink': "Nombre de connexion ouverte vers des serveurs piext : %nb.",
-		'trace-message': "Réception d'un message du serveur %ip:%port = %msg.",
-		'trace-close': "Fermeture du canal vers le serveur %ip:%port.",
+		'trace-message': "Réception d'un message du serveur %ip = %msg.",
+		'trace-close': "Fermeture du canal vers le serveur %ip.",
 		'trace-sensor': "Donnée du capteur [%id] = %val.",
 		'trace-sensor-key': "Clef du capteur : %key.",
 		'trace-input': "La pin %pin de la carte %board n'est pas initialisée comme entrée %type.",
@@ -343,25 +343,25 @@ new (function() {
 		}
 		return true;
 	};
-	ext_tools.pushWebSocket = function(ipAddress, port, socket) {
+	ext_tools.pushWebSocket = function(ipAddress, socket) {
 		for(var i=0; i<this.webSocketsArray.length; i++) {
-			if((this.webSocketsArray[i].ip === ipAddress) && (this.webSocketsArray[i].port === port)) {
+			if(this.webSocketsArray[i].ip === ipAddress) {
 				this.webSocketsArray[i].ws = socket;
 				return;
 			}
 		}
-		this.webSocketsArray.push({'ip': ipAddress, 'port': port, 'ws': socket});
+		this.webSocketsArray.push({'ip': ipAddress, 'ws': socket});
 	};
-	ext_tools.foundWebSocket = function(ipAddress, port) {
+	ext_tools.foundWebSocket = function(ipAddress) {
 		for(var i=0; i<this.webSocketsArray.length; i++) {
-			if((this.webSocketsArray[i].ip === ipAddress) && (this.webSocketsArray[i].port === port) && (this.webSocketsArray[i].ws !== null))
+			if((this.webSocketsArray[i].ip === ipAddress) && (this.webSocketsArray[i].ws !== null))
 				return i;
 		}
 		return -1;
 	};
-	ext_tools.killWebSocket = function(ipAddress, port) {
+	ext_tools.killWebSocket = function(ipAddress) {
 		for(var i=0; i<this.webSocketsArray.length; i++) {
-			if((this.webSocketsArray[i].ip === ipAddress) && (this.webSocketsArray[i].port === port)) {
+			if(this.webSocketsArray[i].ip === ipAddress) {
 				this.webSocketsArray[i].ws = null;
 				for(var j=0; j<this.boardLinkedArray.length; j++)
 					if(this.boardLinkedArray[j] === i)
@@ -427,16 +427,16 @@ new (function() {
 			break;
 		case 'version':
 			// Fixer la version du serveur actuelle
-			var idSoc = ext_tools.foundWebSocket(info.ip, info.port);
+			var idSoc = ext_tools.foundWebSocket(info.ip);
 			var so = ext_tools.webSocketsArray[idSoc];
 			so.version = msg[1];
-			ext_tools.trace(1, 'server-version', {board:info.board, ip: info.ip, port: info.port, version: msg[1]});
+			ext_tools.trace(1, 'server-version', {board:info.board, ip: info.ip, version: msg[1]});
 			break;
 		default:
 			ext_tools.trace(1, 'err-message', {board:info.board, msg:message});
 		}
 	};
-	ext_tools.setBoard = function(boardID, ipAddress, port, callback) {
+	ext_tools.setBoard = function(boardID, ipAddress, callback) {
 		if(this.simulateurs[boardID]!=undefined)
 			this.simulateurs[boardID].close();
 		if(ipAddress=='virtual') {
@@ -444,20 +444,20 @@ new (function() {
 			this.simulateurs[boardID] = newSimulateur(this, boardID, callback);
 		} else {
 			function noServerAlert() {
-				ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, port:port, board:boardID}));
+				ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, board:boardID}));
 			}
 
 			var timeoutID;
 
-			ext_tools.trace(1, 'trace-connect', {ip:ipAddress, port:port, board:boardID});
+			ext_tools.trace(1, 'trace-connect', {ip:ipAddress, board:boardID});
 
 			// Recherche une connexion au serveur piext déjà éxistante...
-			var idSoc = ext_tools.foundWebSocket(ipAddress, port);
+			var idSoc = ext_tools.foundWebSocket(ipAddress);
 
 			if(idSoc >= 0) {
 				// Relier le serveur piext à la carte
 				ext_tools.linkBoard(boardID, idSoc);
-				ext_tools.trace(0, 'trace-uplink', {ip:ipAddress, port:port, board:boardID});
+				ext_tools.trace(0, 'trace-uplink', {ip:ipAddress, board:boardID});
 				ext_tools.boardStatus = 2;
 	 			ext_tools.boardMessage = Trad['online'];
  				var socket = this.getSocket(boardID);
@@ -465,7 +465,7 @@ new (function() {
 				callback();
 			} else {
 				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
-				var socket = new WebSocket('ws://' + ipAddress + ':' + port);
+				var socket = new WebSocket('ws://' + ipAddress + ':1234');
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
 				timeoutID = window.setTimeout(noServerAlert, 2000);
@@ -475,22 +475,22 @@ new (function() {
 					window.clearTimeout(timeoutID);
 					ext_tools.boardStatus = 2;
 					ext_tools.boardMessage = Trad['online'];
-					ext_tools.pushWebSocket(ipAddress, port, socket);
-					ext_tools.linkBoard(boardID, ext_tools.foundWebSocket(ipAddress, port));
+					ext_tools.pushWebSocket(ipAddress, socket);
+					ext_tools.linkBoard(boardID, ext_tools.foundWebSocket(ipAddress));
 
-					ext_tools.trace(0, 'trace-link', {ip:ipAddress, port:port, board:boardID});
+					ext_tools.trace(0, 'trace-link', {ip:ipAddress, board:boardID});
 					ext_tools.trace(1, 'trace-nblink', {nb:ext_tools.webSocketsArray.length});
 
 					socket.send('ext4sOnline/'+version);
 
 					socket.onmessage = function(message) {
-						ext_tools.trace(1, 'trace-message', {ip:ipAddress, port:port, msg:message.data});
-						ext_tools.onMessage(message.data, {board: boardID, ip:ipAddress, port:port});
+						ext_tools.trace(1, 'trace-message', {ip:ipAddress, msg:message.data});
+						ext_tools.onMessage(message.data, {board: boardID, ip:ipAddress});
 					};
 
 					socket.onclose = function(message) {
-						ext_tools.killWebSocket(ipAddress, port);
-						ext_tools.trace(1, 'trace-close', {ip:ipAddress, port:port});
+						ext_tools.killWebSocket(ipAddress);
+						ext_tools.trace(1, 'trace-close', {ip:ipAddress});
 						ext_tools.boardStatus = 1;
 						ext_tools.boardMessage = Trad['offline'];
 					};
@@ -835,8 +835,8 @@ new (function() {
 	};
 
 	// Connexion à une carte piext
-	ext.setBoard = function(boardID, ipAddress, port, callback) {
-		ext_tools.setBoard(boardID, ipAddress, port, callback);
+	ext.setBoard = function(boardID, ipAddress, callback) {
+		ext_tools.setBoard(boardID, ipAddress, callback);
 	};
 
 	ext.addShield = function(boardID, shName, option) {
@@ -1163,7 +1163,7 @@ new (function() {
 	var descriptor = {
 		blocks: [
 			// Connexion à la carte piext
-			['w', "Connection de la carte %m.bdNum Adresse IP/Port: %s : %s", 'setBoard', '1', 'virtual', '1234'],
+			['w', "Connection de la carte %m.bdNum Adresse IP/Port: %s", 'setBoard', '1', 'virtual'],
 			// Ajouter la connexion d'un utiliseur ???
 			// w ? definir la conf du serveur
 			[' ', "Déclarer le shield sur la carte %m.bdNum Initialiser la carte %m.shield ( %s )", 'addShield', '1', 'Choisir une carte', ''],
@@ -1230,13 +1230,13 @@ new (function() {
 			moduleDigit: ['1. Grove LED', '2. Grove Relais', '3. Grove Button', '4. Grove Buzzer', '5. Grove Chainable RGB LED', '6. Grove LED Bar', '7. Grove 4 Digit Display', '8. Grove UltraSonic', '9. Grove DHT Digital Sensor', '10. Grove PIR Motion Sensor', '11. Grove Line Finder'],
 			analogPin: ['A0', 'A1', 'A2'],
 			moduleAnalog: ['1. Grove Rotor Position', '2. Grove Light Sensor', '3. Grove Thermometer', '4. Grove Joystick'],
-			moduleMode: ['1. Grove-LCD RGB Backlight', '2. Grove oLed 128x64', '3. Grove oLed 96x96', '4. Grove-GPS', '5. Grove Step Motor Driver','6. Grove miniTrackBall'],
+			moduleMode: ['1. Grove-LCD RGB Backlight', '2. Grove oLed 128x64', '3. Grove oLed 96x96', '4. Grove oLed 128x128', '5. Grove-GPS', '6. Grove Step Motor Driver', '7. Grove miniTrackBall'],
 			ledPin: ['1', '2'],
 			LCD: ["1. Effacer l'écran", "2. Faire clignoter le curseur", "3. Faire clignoter l'écran", "4. Stopper le clig. du curseur", "5. Stopper le clig. de l'écran"],
 			onOff: ['Off', 'On'],
 			inversion: ['False', 'True'],
 			trace: ['0. Minimal', '1. Normal', '2. Intense'],
-			modValue: ['1. GPS Latitude','2. GPS Longitude','3. GPS Nb satelites','4. TrackBall Haut','5. TrackBall Bas','6. TrackBall Gauche','7. TrackBall Droite','8. TrackBall Confirmer'],
+			modValue: ['1. GPS Latitude', '2. GPS Longitude', '3. GPS Nb satelites', '4. TrackBall Haut', '5. TrackBall Bas', '6. TrackBall Gauche', '7. TrackBall Droite', '8. TrackBall Confirmer'],
 			ledBar: ['1. Effacer', '2. Rouge premier', '3. Rouge dernier', '4. Allumer tout'],
 			digitValue: ['1. Température', '2. Humidité', '3. Distance Sonar'],
 			analogValue: ['1. Joystick X', '2. Joystick Y', '3. Joystick Push'],
