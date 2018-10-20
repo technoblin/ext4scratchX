@@ -477,6 +477,7 @@ new (function() {
 				// Attachement de la connexion en cas de réussite
 				socket.onopen = function(event) {
 					window.clearTimeout(timeoutID);
+					console.log(socket);
 					ext_tools.boardStatus = 2;
 					ext_tools.boardMessage = Trad['online'];
 					ext_tools.pushWebSocket(ipAddress, socket);
