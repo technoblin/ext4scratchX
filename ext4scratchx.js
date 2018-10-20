@@ -443,10 +443,6 @@ new (function() {
 			ext_tools.trace(1, 'trace-virtual', {board:boardID});
 			this.simulateurs[boardID] = newSimulateur(this, boardID, callback);
 		} else {
-			function noServerAlert() {
-				ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, board:boardID}));
-			}
-
 			var timeoutID;
 
 			ext_tools.trace(1, 'trace-connect', {ip:ipAddress, board:boardID});
@@ -473,7 +469,10 @@ new (function() {
 				}
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
-				timeoutID = window.setTimeout(noServerAlert, 2000);
+				timeoutID = window.setTimeout(function() {
+					console.log(socket);
+					ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, board:boardID}));
+				}, 2000);
 
 				// Attachement de la connexion en cas de réussite
 				socket.onopen = function(event) {
