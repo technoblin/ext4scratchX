@@ -43,7 +43,6 @@ new (function() {
 		'server-version': "Le serveur de la carte %board à l'adresse %ip en est à la version %version.",
 		'trace-virtual': "Affectation de la carte %board au simulateur.",
 		'trace-connect': "Affectation de la carte %board au serveur piext %ip.",
-		'trace-doconnect': "Début du ratachement de la carte %board au serveur piext %ip.",
 		'trace-link': "Canal ouvert pour la carte %board sur le serveur %ip.",
 		'trace-uplink': "Canal rataché pour la carte %board sur le serveur %ip.",
 		'trace-nblink': "Nombre de connexion ouverte vers des serveurs piext : %nb.",
@@ -450,7 +449,7 @@ new (function() {
 
 			var timeoutID;
 
-			ext_tools.trace(1, 'trace-doconnect', {ip:ipAddress, board:boardID});
+			ext_tools.trace(1, 'trace-connect', {ip:ipAddress, board:boardID});
 
 			// Recherche une connexion au serveur piext déjà éxistante...
 			var idSoc = ext_tools.foundWebSocket(ipAddress);
@@ -465,13 +464,12 @@ new (function() {
 				socket.ws.send('resetBoard/'+version);
 				callback();
 			} else {
+// TODO: Si la connexion echoue ouvrir une page https://ipAddress:1234 pour valider le certificat puis recommencer (Créer un JS de merde pour relancer la procédure. TODO timeout
 				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
-				var socket = new WebSocket('ws://' + ipAddress + ':1234');
+				var socket = new WebSocket('wss://' + ipAddress + ':1234');
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
 				timeoutID = window.setTimeout(noServerAlert, 2000);
-
-					ext_tools.trace(0, 'trace-link', {ip:ipAddress, board:boardID});
 
 				// Attachement de la connexion en cas de réussite
 				socket.onopen = function(event) {
@@ -539,7 +537,7 @@ new (function() {
 		for(var i=0; i<this.sensorDataArray.length; i++)
 			if(this.sensorDataArray[i].key === keyGen)
 				return i;
-		this.sensorDataArray.push({'key': keyGen, 'stack': this.newStack(10)});
+		this.sensorDataArray.push({'key': keyGen, 'stack': this.newStack(10, keyGen)});
 		return i;
 	};
 	ext_tools.genReporterKey = function(boardID, pinNum, designator) {
@@ -815,7 +813,7 @@ new (function() {
 	ext_tools.getModuleAddr = function(n) {
 		var list = {
 			4: 'SP',
-			6: 'i0x4a',
+			7: 'i0x4a',
 		};
 		return list[n];
 	};
