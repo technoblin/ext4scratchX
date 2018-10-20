@@ -465,8 +465,12 @@ new (function() {
 				callback();
 			} else {
 // TODO: Si la connexion echoue ouvrir une page https://ipAddress:1234 pour valider le certificat puis recommencer (Créer un JS de merde pour relancer la procédure. TODO timeout
-				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
-				var socket = new WebSocket('wss://' + ipAddress + ':1234');
+				try {
+					// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
+					var socket = new WebSocket('wss://' + ipAddress + ':1234');
+				} catch(ex) {
+					console.log(ex);
+				}
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
 				timeoutID = window.setTimeout(noServerAlert, 2000);
