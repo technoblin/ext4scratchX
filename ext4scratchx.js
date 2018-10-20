@@ -461,23 +461,22 @@ new (function() {
 				callback();
 			} else {
 // TODO: Si la connexion echoue ouvrir une page https://ipAddress:1234 pour valider le certificat puis recommencer (Créer un JS de merde pour relancer la procédure. TODO timeout
-				try {
-					// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
-					var socket = new WebSocket('wss://' + ipAddress + ':1234');
-				} catch(ex) {
-					console.log(ex);
-				}
+				// Ouverture du Socket vers le serveur piext puis enregistrement de celui-ci
+				var socket = new WebSocket('wss://' + ipAddress + ':1234');
+				
+				socket.onerror = function(event) {
+					console.log(event);
+				};
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
 				timeoutID = window.setTimeout(function() {
-					console.log(socket);
+					window.open('https://'+ipAddress+':1234');
 					ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, board:boardID}));
 				}, 2000);
 
 				// Attachement de la connexion en cas de réussite
 				socket.onopen = function(event) {
 					window.clearTimeout(timeoutID);
-					console.log(socket);
 					ext_tools.boardStatus = 2;
 					ext_tools.boardMessage = Trad['online'];
 					ext_tools.pushWebSocket(ipAddress, socket);
