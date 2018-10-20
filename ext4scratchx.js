@@ -465,12 +465,11 @@ new (function() {
 				var socket = new WebSocket('wss://' + ipAddress + ':1234');
 				
 				socket.onerror = function(event) {
-					console.log(event);
+					window.open('https://'+ipAddress+':1234');
 				};
 
 				// Démarrage d'un timer pour interrompre l'execution en cas de non réponse
 				timeoutID = window.setTimeout(function() {
-					// window.open('https://'+ipAddress+':1234');
 					ext_tools.error(Trad.traduir('err-connect', {ip:ipAddress, board:boardID}));
 				}, 2000);
 
